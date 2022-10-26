@@ -1,0 +1,97 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/Battle/UnitSlot.cs" type="Script" id=1]
+[ext_resource path="res://sprites/unit01.png" type="Texture" id=2]
+[ext_resource path="res://resources/units/unit01.tres" type="Resource" id=3]
+[ext_resource path="res://scripts/Battle/BattleSystem.cs" type="Script" id=4]
+[ext_resource path="res://scenes/battle/EnemySlot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/troops/troop01.tres" type="Resource" id=6]
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1536, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 1536, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 1536, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 576, 1536, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 768, 1536, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 960, 1536, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1536, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[node name="Root" type="Node2D"]
+
+[node name="Party" type="Node" parent="."]
+
+[node name="LeftUnit" type="Node" parent="Party"]
+script = ExtResource( 1 )
+_actionMap = "battle_left_unit_action"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Party/LeftUnit"]
+position = Vector2( 611, 246 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 17 )
+
+[node name="UpUnit" type="Node" parent="Party"]
+script = ExtResource( 1 )
+_actionMap = "battle_up_unit_action"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Party/UpUnit"]
+position = Vector2( 766, 142 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 8 )
+animation = "attack"
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 265, 269 )
+
+[node name="BattleSystem" type="Node" parent="."]
+script = ExtResource( 4 )
+_partyLeftUnit = ExtResource( 3 )
+_partyUpUnit = ExtResource( 3 )
+_troop = ExtResource( 6 )
+_enemyModel = ExtResource( 5 )
