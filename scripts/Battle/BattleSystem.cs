@@ -20,6 +20,7 @@ namespace Rpg2d.Battle
         [Export]
         private PackedScene _enemyModel;
         private List<EnemySlot> _enemies = new List<EnemySlot>();
+        private TargetSelector _targetSelector;
 
         public override void _Ready()
         {
@@ -31,6 +32,7 @@ namespace Rpg2d.Battle
             _leftUnit.ActionFinished = ActionFinished;
             _upUnit.SetUnit(_partyUpUnit);
             _upUnit.ActionFinished = ActionFinished;
+            _targetSelector = GetNode<TargetSelector>("../TargetSelector");
             SetupTroop(_troop);
             StartPartyTurn();
         }
@@ -48,6 +50,8 @@ namespace Rpg2d.Battle
                 enemySlot.ActionFinished = EnemyActionFinished;
                 _enemies.Add(enemySlot);
             }
+            _targetSelector.Init(_enemies);
+            _targetSelector.Select(0);
         }
 
         private void EnemyActionFinished(BattleAction obj)
@@ -62,6 +66,7 @@ namespace Rpg2d.Battle
         {
             _leftUnit.CanAct = true;
             _upUnit.CanAct = true;
+            _targetSelector.Enabled = true;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -78,6 +83,7 @@ namespace Rpg2d.Battle
 
         private async void StartEnemyTurn()
         {
+            _targetSelector.Enabled = false;
             await ToSignal(GetTree().CreateTimer(3), "timeout");
             foreach (var enemy in _enemies)
             {
