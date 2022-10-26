@@ -65,5 +65,7 @@ namespace Rpg2d.Battle
                 Select(offsetIndex);
             }
         }
+
+        public EnemySlot GetSelected() => _enemies[_selectedIndex];
     }
 }

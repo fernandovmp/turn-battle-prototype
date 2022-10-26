@@ -4,7 +4,7 @@ using System;
 
 namespace Rpg2d.Battle
 {
-    public class BattleUnit
+    public class BattleUnit : IBattler
     {
         public string Name { get; set; }
         public int MaxHp { get; set; }

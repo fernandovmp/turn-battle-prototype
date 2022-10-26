@@ -89,12 +89,33 @@ namespace Rpg2d.Battle
             {
                 enemy.CanAct = true;
             }
-            foreach (var enemy in _enemies)
+            var ai = _troop.AI;
+            var actions = ai.GetActions(new BattleContext
             {
-                enemy.Attack();
-                await ToSignal(GetTree().CreateTimer(1), "timeout");
+                Enemies = _enemies.Select(x => x.Enemy),
+                Party = EnumerateUnits().Select(x => x.Battler)
+            });
+            while (actions.MoveNext())
+            {
+                var action = actions.Current;
+                if (action is WaitAction waitAction)
+                {
+                    await ToSignal(GetTree().CreateTimer(waitAction.Seconds), "timeout");
+                }
+                else
+                {
+                    foreach (var target in action.TargetGroup.GetTargets())
+                    {
+                        action.Skill.Cast(new Skills.CastContext
+                        {
+                            Caster = action.Owner,
+                            Skill = action.Skill,
+                            Target = target
+                        });
+                    }
+                }
             }
-            await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+            StartPartyTurn();
         }
 
         public IEnumerable<UnitSlot> EnumerateUnits()

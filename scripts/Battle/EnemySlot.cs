@@ -10,6 +10,7 @@ namespace Rpg2d.Battle
         private BattleAction _selectedAction = new BattleAction();
         public bool CanAct { get; set; }
         public Action<BattleAction> ActionFinished { get; set; }
+        public BattleEnemy Enemy => _enemy;
 
         public override void _Ready()
         {

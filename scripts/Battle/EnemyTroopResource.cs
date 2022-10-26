@@ -10,5 +10,7 @@ namespace Rpg2d.Battle
         public EnemyResource[] Enemies { get; set; }
         [Export]
         public Vector2[] Positions { get; set; }
+        [Export]
+        public AiResource AI { get; set; }
     }
 }

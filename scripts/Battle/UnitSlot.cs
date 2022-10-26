@@ -13,10 +13,15 @@ namespace Rpg2d.Battle
         private BattleAction _selectedAction = new BattleAction();
         public bool CanAct { get; set; }
         public Action<BattleAction> ActionFinished { get; set; }
+        public IBattler Battler => _unit;
+
+        private TargetSelector _targetSelector;
 
         public override void _Ready()
         {
             _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+            _targetSelector = GetNode<TargetSelector>("/root/Root/TargetSelector");
+            _selectedAction.Owner = _unit;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -25,6 +30,15 @@ namespace Rpg2d.Battle
             {
                 CanAct = false;
                 _animatedSprite.Play(_selectedAction.Skill.ActionAnimation);
+                if (_selectedAction.TargetGroup is null)
+                {
+                    _selectedAction.Skill.Cast(new Skills.CastContext
+                    {
+                        Caster = _unit,
+                        Skill = _selectedAction.Skill,
+                        Target = _targetSelector.GetSelected().Enemy
+                    });
+                }
                 _animatedSprite.Connect("animation_finished", this, nameof(ResetAnimation));
             }
         }

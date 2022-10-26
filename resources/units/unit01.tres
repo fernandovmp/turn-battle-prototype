@@ -54,7 +54,7 @@ animations = [ {
 
 [resource]
 script = ExtResource( 2 )
-Name = null
+Name = "Unit01"
 MaxHp = 100
 Attack = 10
 AnimationFrames = SubResource( 8 )
