@@ -1,4 +1,5 @@
 using Godot;
+using Rpg2d.UI.Battle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Rpg2d.Battle
         private PackedScene _enemyModel;
         private List<EnemySlot> _enemies = new List<EnemySlot>();
         private TargetSelector _targetSelector;
+        private BattleUi _battleUi;
 
         public override void _Ready()
         {
@@ -33,7 +35,9 @@ namespace Rpg2d.Battle
             _upUnit.SetUnit(_partyUpUnit);
             _upUnit.ActionFinished = ActionFinished;
             _targetSelector = GetNode<TargetSelector>("../TargetSelector");
+            _battleUi = GetNode<BattleUi>("../CanvasLayer/UnitHudContainer");
             SetupTroop(_troop);
+            _battleUi.InitUnitHuds(EnumerateUnits());
             StartPartyTurn();
         }
 

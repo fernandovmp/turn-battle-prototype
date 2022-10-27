@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arrow.png-e8a0fd8c833ffea01aca4b2d6e6cc529.stex"
+path="res://.import/hud_border.png-c3be17c5c37b755b9c5b8b1752307f7a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/arrow.png"
-dest_files=[ "res://.import/arrow.png-e8a0fd8c833ffea01aca4b2d6e6cc529.stex" ]
+source_file="res://sprites/hud_border.png"
+dest_files=[ "res://.import/hud_border.png-c3be17c5c37b755b9c5b8b1752307f7a.stex" ]
 
 [params]
 
