@@ -92,8 +92,8 @@ namespace Rpg2d.Battle
             var ai = _troop.AI;
             var actions = ai.GetActions(new BattleContext
             {
-                Enemies = _enemies.Select(x => x.Enemy),
-                Party = EnumerateUnits().Select(x => x.Battler)
+                Enemies = _enemies,
+                Party = EnumerateUnits()
             });
             while (actions.MoveNext())
             {
@@ -104,11 +104,12 @@ namespace Rpg2d.Battle
                 }
                 else
                 {
+                    action.Owner.PerformAction(action);
                     foreach (var target in action.TargetGroup.GetTargets())
                     {
                         action.Skill.Cast(new Skills.CastContext
                         {
-                            Caster = action.Owner,
+                            Caster = action.Owner.Battler,
                             Skill = action.Skill,
                             Target = target
                         });

@@ -8,7 +8,7 @@ namespace Rpg2d.Battle
     {
         public Skill Skill { get; set; }
         public ITargetGroup TargetGroup { get; set; }
-        public IBattler Owner { get; set; }
+        public IBattlerSlot Owner { get; set; }
 
         public void Reset(Skill skill) => Select(skill, null);
         public void Select(Skill skill, ITargetGroup targetGroup)

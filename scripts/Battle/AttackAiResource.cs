@@ -14,7 +14,7 @@ namespace Rpg2d.Battle
         {
             foreach (var entity in context.Enemies)
             {
-                IBattler target = context.Party.FirstOrDefault(unit => unit.Hp > 0);
+                IBattlerSlot target = context.Party.FirstOrDefault(unit => unit.Battler.Hp > 0);
                 if (target != null)
                 {
                     yield return new BattleAction

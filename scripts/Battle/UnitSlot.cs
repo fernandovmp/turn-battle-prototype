@@ -3,7 +3,7 @@ using System;
 
 namespace Rpg2d.Battle
 {
-    public class UnitSlot : Node
+    public class UnitSlot : Node, IBattlerSlot
     {
 
         [Export]
@@ -21,7 +21,7 @@ namespace Rpg2d.Battle
         {
             _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
             _targetSelector = GetNode<TargetSelector>("/root/Root/TargetSelector");
-            _selectedAction.Owner = _unit;
+            _selectedAction.Owner = this;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -36,7 +36,7 @@ namespace Rpg2d.Battle
                     {
                         Caster = _unit,
                         Skill = _selectedAction.Skill,
-                        Target = _targetSelector.GetSelected().Enemy
+                        Target = _targetSelector.GetSelected()
                     });
                 }
                 _animatedSprite.Connect("animation_finished", this, nameof(ResetAnimation));
@@ -57,6 +57,11 @@ namespace Rpg2d.Battle
             _animatedSprite.Frames = _unit.AnimationFrames;
             _animatedSprite.Animation = _unit.AttackSkill.IdleAnimation;
             _selectedAction.Reset(_unit.AttackSkill);
+        }
+
+        public void PerformAction(BattleAction action)
+        {
+            throw new NotImplementedException();
         }
     }
 }

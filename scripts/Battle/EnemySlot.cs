@@ -3,14 +3,14 @@ using System;
 
 namespace Rpg2d.Battle
 {
-    public class EnemySlot : Node
+    public class EnemySlot : Node, IBattlerSlot
     {
         private AnimatedSprite _animatedSprite;
         private BattleEnemy _enemy;
         private BattleAction _selectedAction = new BattleAction();
         public bool CanAct { get; set; }
         public Action<BattleAction> ActionFinished { get; set; }
-        public BattleEnemy Enemy => _enemy;
+        public IBattler Battler => _enemy;
 
         public override void _Ready()
         {
@@ -33,13 +33,11 @@ namespace Rpg2d.Battle
             _selectedAction.Reset(_enemy.AttackSkill);
         }
 
-        public BattleAction Attack()
+        public void PerformAction(BattleAction action)
         {
             CanAct = false;
-            _selectedAction.Select(_enemy.AttackSkill, null);
-            _animatedSprite.Play(_selectedAction.Skill.ActionAnimation);
+            _animatedSprite.Play(action.Skill.ActionAnimation);
             _animatedSprite.Connect("animation_finished", this, nameof(ResetAnimation));
-            return _selectedAction;
         }
     }
 }

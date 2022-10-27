@@ -66,6 +66,6 @@ namespace Rpg2d.Battle
             }
         }
 
-        public EnemySlot GetSelected() => _enemies[_selectedIndex];
+        public IBattler GetSelected() => _enemies[_selectedIndex].Battler;
     }
 }

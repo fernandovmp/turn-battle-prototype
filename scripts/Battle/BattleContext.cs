@@ -4,7 +4,7 @@ namespace Rpg2d.Battle
 {
     public class BattleContext
     {
-        public IEnumerable<IBattler> Enemies { get; set; }
-        public IEnumerable<IBattler> Party { get; set; }
+        public IEnumerable<IBattlerSlot> Enemies { get; set; }
+        public IEnumerable<IBattlerSlot> Party { get; set; }
     }
 }
