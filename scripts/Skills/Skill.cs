@@ -21,8 +21,8 @@ namespace Rpg2d.Skills
 
         public void Cast(CastContext context)
         {
-            context.Target.Hp -= context.Target.Attack + Damage;
-            GD.Print($"{context.Target.Name} - HP: {context.Target.Hp}");
+            int damage = context.Target.Attack + Damage;
+            context.Target.DealDamage(damage);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Rpg2d.UI.Battle
     {
         private Label _nameLabel;
         private TextureProgress _hpBar;
-        private UnitSlot _unit;
+        private IBattlerSlot _unit;
 
         public void Initialize()
         {
@@ -17,16 +17,28 @@ namespace Rpg2d.UI.Battle
             _hpBar = GetNode<TextureProgress>("HpBar");
         }
 
-        public void SetUnit(UnitSlot unit)
+        public void SetUnit(IBattlerSlot unit)
         {
+            if (_unit != null)
+            {
+                RemoveUnit();
+            }
             _unit = unit;
+            _unit.Died += Update;
+            _unit.DamageRecived += Update;
             Update();
+        }
+
+        private void RemoveUnit()
+        {
+            _unit.Died -= Update;
+            _unit.DamageRecived -= Update;
         }
 
         public void Update()
         {
             _nameLabel.Text = _unit.Battler.Name;
-            _hpBar.Value = _unit.Battler.Hp / (double)_unit.Battler.MaxHp;
+            _hpBar.Value = _unit.Battler.Hp / (double)_unit.Battler.MaxHp * 100;
         }
     }
 }

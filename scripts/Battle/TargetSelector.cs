@@ -1,4 +1,5 @@
 using Godot;
+using Rpg2d.UI.Battle;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +12,9 @@ namespace Rpg2d.Battle
         private int _selectedIndex = 0;
         [Export]
         private bool _enabled;
+
+        public Action<IBattlerSlot> SelectedTargetChanged { get; set; }
+        public Action<bool> EnableChanged { get; set; }
         public bool Enabled
         {
             get
@@ -23,6 +27,7 @@ namespace Rpg2d.Battle
                 if (_selectionCursor != null)
                 {
                     _selectionCursor.Visible = _enabled;
+                    EnableChanged?.Invoke(value);
                 }
             }
         }
@@ -47,6 +52,7 @@ namespace Rpg2d.Battle
             var selectedEnemyPosition = _enemies[_selectedIndex].GetNode<AnimatedSprite>("AnimatedSprite");
             var position = selectedEnemyPosition.ToGlobal(new Vector2(0, -45));
             _selectionCursor.GlobalPosition = position;
+            SelectedTargetChanged?.Invoke(_enemies[_selectedIndex]);
         }
         public override void _Input(InputEvent inputEvent)
         {

@@ -4,15 +4,8 @@ using System;
 
 namespace Rpg2d.Battle
 {
-    public class BattleUnit : IBattler
+    public class BattleUnit : BaseBattler
     {
-        public string Name { get; set; }
-        public int MaxHp { get; set; }
-        public int Hp { get; set; }
-        public int Attack { get; set; }
-        public SpriteFrames AnimationFrames { get; set; }
-        public Skill AttackSkill { get; set; }
-
         public BattleUnit(UnitResource unit)
         {
             Name = unit.Name;

@@ -15,6 +15,9 @@ namespace Rpg2d.Battle
         public Action<BattleAction> ActionFinished { get; set; }
         public IBattler Battler => _unit;
 
+        public Action DamageRecived { get; set; }
+        public Action Died { get; set; }
+
         private TargetSelector _targetSelector;
 
         public override void _Ready()
@@ -57,6 +60,18 @@ namespace Rpg2d.Battle
             _animatedSprite.Frames = _unit.AnimationFrames;
             _animatedSprite.Animation = _unit.AttackSkill.IdleAnimation;
             _selectedAction.Reset(_unit.AttackSkill);
+            _unit.DamageRecived += OnDamageRecived;
+            _unit.Died += OnDied;
+        }
+
+        private void OnDied()
+        {
+            Died?.Invoke();
+        }
+
+        private void OnDamageRecived()
+        {
+            DamageRecived?.Invoke();
         }
 
         public void PerformAction(BattleAction action)

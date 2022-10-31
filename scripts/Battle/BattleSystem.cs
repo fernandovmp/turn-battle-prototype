@@ -1,6 +1,5 @@
 using Godot;
 using Rpg2d.UI.Battle;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,7 +34,9 @@ namespace Rpg2d.Battle
             _upUnit.SetUnit(_partyUpUnit);
             _upUnit.ActionFinished = ActionFinished;
             _targetSelector = GetNode<TargetSelector>("../TargetSelector");
-            _battleUi = GetNode<BattleUi>("../CanvasLayer/UnitHudContainer");
+            _battleUi = GetNode<BattleUi>("../CanvasLayer");
+            _targetSelector.SelectedTargetChanged += _battleUi.UpdateTargetHud;
+            _targetSelector.EnableChanged += _battleUi.ShowTargetHud;
             SetupTroop(_troop);
             _battleUi.InitUnitHuds(EnumerateUnits());
             StartPartyTurn();

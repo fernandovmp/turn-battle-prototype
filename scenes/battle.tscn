@@ -102,6 +102,14 @@ position = Vector2( 56, 52 )
 frames = SubResource( 18 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 9 )
+_unitHudModel = ExtResource( 10 )
+
+[node name="TargetHudContainer" type="Control" parent="CanvasLayer"]
+margin_left = 32.0
+margin_top = 435.0
+margin_right = 1000.0
+margin_bottom = 501.0
 
 [node name="UnitHudContainer" type="HFlowContainer" parent="CanvasLayer"]
 anchor_top = 1.0
@@ -109,8 +117,6 @@ anchor_bottom = 1.0
 margin_left = 30.0
 margin_top = -77.0
 margin_right = 1002.0
-script = ExtResource( 9 )
-_unitHudModel = ExtResource( 10 )
 
 [node name="BattleSystem" type="Node" parent="."]
 script = ExtResource( 4 )
