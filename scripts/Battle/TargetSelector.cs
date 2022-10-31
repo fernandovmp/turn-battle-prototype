@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Rpg2d.Battle
 {
-    public class TargetSelector : Node2D
+    public class TargetSelector : Node2D, ITargetSelector
     {
         private Node2D _selectionCursor;
         private List<EnemySlot> _enemies;
@@ -46,7 +46,64 @@ namespace Rpg2d.Battle
             _enemies = targets;
         }
 
-        public void Select(int index)
+        public override void _Input(InputEvent inputEvent)
+        {
+            if (!Enabled) return;
+            if (inputEvent.IsActionPressed("battle_enemy_up"))
+            {
+                Next();
+            }
+            else if (inputEvent.IsActionPressed("battle_enemy_down"))
+            {
+                Previous();
+            }
+        }
+
+        public IBattler GetSelected() => _enemies[_selectedIndex].Battler;
+
+        public void First()
+        {
+            int index = _enemies.FindIndex(t => !t.IsDead);
+            if (index < 0)
+            {
+                index = 0;
+            }
+            Select(index);
+        }
+
+        public void Next()
+        {
+            int index = (_selectedIndex + 1) % _enemies.Count;
+            int startIndex = _selectedIndex;
+            while (_enemies[index].IsDead && startIndex != index)
+            {
+                index = (index + 1) % _enemies.Count;
+            }
+            _selectedIndex = index;
+            Select(index);
+        }
+
+        public void Previous()
+        {
+            int index = _selectedIndex - 1;
+            if (index < 0)
+            {
+                index = _enemies.Count - 1;
+            }
+            int startIndex = _selectedIndex;
+            while (_enemies[index].IsDead && startIndex != index)
+            {
+                index -= 1;
+                if (index < 0)
+                {
+                    index = _enemies.Count - 1;
+                }
+            }
+            _selectedIndex = index;
+            Select(index);
+        }
+
+        private void Select(int index)
         {
             _selectedIndex = index % _enemies.Count;
             var selectedEnemyPosition = _enemies[_selectedIndex].GetNode<AnimatedSprite>("AnimatedSprite");
@@ -54,24 +111,5 @@ namespace Rpg2d.Battle
             _selectionCursor.GlobalPosition = position;
             SelectedTargetChanged?.Invoke(_enemies[_selectedIndex]);
         }
-        public override void _Input(InputEvent inputEvent)
-        {
-            if (!Enabled) return;
-            if (inputEvent.IsActionPressed("battle_enemy_up"))
-            {
-                Select(_selectedIndex + 1);
-            }
-            else if (inputEvent.IsActionPressed("battle_enemy_down"))
-            {
-                int offsetIndex = _selectedIndex - 1;
-                if (offsetIndex < 0)
-                {
-                    offsetIndex = _enemies.Count - 1;
-                }
-                Select(offsetIndex);
-            }
-        }
-
-        public IBattler GetSelected() => _enemies[_selectedIndex].Battler;
     }
 }

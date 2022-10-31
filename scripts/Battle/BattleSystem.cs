@@ -56,10 +56,10 @@ namespace Rpg2d.Battle
                 node2D.Position = troop.Positions[i];
                 enemySlot.SetEnemy(troop.Enemies[i]);
                 enemySlot.ActionDispatcher = _actionDispatcher;
+                enemySlot.Died += _targetSelector.Next;
                 _enemies.Add(enemySlot);
             }
             _targetSelector.Init(_enemies);
-            _targetSelector.Select(0);
         }
 
         private void EnemyActionFinished(BattleAction obj)
@@ -76,6 +76,7 @@ namespace Rpg2d.Battle
             _upUnit.ActionEnabled = true;
             _targetSelector.Enabled = true;
             _partyTurn = true;
+            _targetSelector.First();
         }
 
         public override void _Input(InputEvent inputEvent)
