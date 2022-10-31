@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 namespace Rpg2d.Battle
 {
@@ -12,6 +13,7 @@ namespace Rpg2d.Battle
         private BattleUnit _unit;
         private BattleAction _selectedAction = new BattleAction();
         public bool CanAct { get; set; }
+        public bool IsActing { get; set; }
         public Action<BattleAction> ActionFinished { get; set; }
         public IBattler Battler => _unit;
 
@@ -19,6 +21,8 @@ namespace Rpg2d.Battle
         public Action Died { get; set; }
 
         private TargetSelector _targetSelector;
+        private TaskCompletionSource<BattleAction> _actionTaskCompletionSource;
+        public IActionDispatcher ActionDispatcher { get; set; }
 
         public override void _Ready()
         {
@@ -31,25 +35,35 @@ namespace Rpg2d.Battle
         {
             if (inputEvent.IsActionPressed(_actionMap) && CanAct)
             {
-                CanAct = false;
-                _animatedSprite.Play(_selectedAction.Skill.ActionAnimation);
-                if (_selectedAction.TargetGroup is null)
-                {
-                    _selectedAction.Skill.Cast(new Skills.CastContext
-                    {
-                        Caster = _unit,
-                        Skill = _selectedAction.Skill,
-                        Target = _targetSelector.GetSelected()
-                    });
-                }
-                _animatedSprite.Connect("animation_finished", this, nameof(ResetAnimation));
+                PerformAction(_selectedAction);
             }
+        }
+
+        public void PerformAction(BattleAction action)
+        {
+            CanAct = false;
+            IsActing = true;
+            _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
+            _animatedSprite.Play(action.Skill.ActionAnimation);
+            if (action.TargetGroup is null)
+            {
+                action.Skill.Cast(new Skills.CastContext
+                {
+                    Caster = _unit,
+                    Skill = action.Skill,
+                    Target = _targetSelector.GetSelected()
+                });
+            }
+            _animatedSprite.Connect("animation_finished", this, nameof(ResetAnimation));
+            ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);
         }
 
         private void ResetAnimation()
         {
             _animatedSprite.Disconnect("animation_finished", this, nameof(ResetAnimation));
+            IsActing = false;
             ActionFinished?.Invoke(_selectedAction);
+            _actionTaskCompletionSource.SetResult(_selectedAction);
             _selectedAction.Reset(_unit.AttackSkill);
             _animatedSprite.Animation = _unit.AttackSkill.IdleAnimation;
         }
@@ -72,11 +86,6 @@ namespace Rpg2d.Battle
         private void OnDamageRecived()
         {
             DamageRecived?.Invoke();
-        }
-
-        public void PerformAction(BattleAction action)
-        {
-            throw new NotImplementedException();
         }
     }
 }

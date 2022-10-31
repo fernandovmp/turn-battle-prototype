@@ -22,7 +22,7 @@ namespace Rpg2d.Battle
         private List<EnemySlot> _enemies = new List<EnemySlot>();
         private TargetSelector _targetSelector;
         private BattleUi _battleUi;
-
+        private IActionDispatcher _actionDispatcher = new ActionDispatcher();
         public override void _Ready()
         {
             var partyNode = GetNode("../Party");
@@ -30,15 +30,16 @@ namespace Rpg2d.Battle
             _leftUnit = partyNode.GetNode<UnitSlot>("LeftUnit");
             _upUnit = partyNode.GetNode<UnitSlot>("UpUnit");
             _leftUnit.SetUnit(_partyLeftUnit);
-            _leftUnit.ActionFinished = ActionFinished;
+            _leftUnit.ActionDispatcher = _actionDispatcher;
             _upUnit.SetUnit(_partyUpUnit);
-            _upUnit.ActionFinished = ActionFinished;
+            _upUnit.ActionDispatcher = _actionDispatcher;
             _targetSelector = GetNode<TargetSelector>("../TargetSelector");
             _battleUi = GetNode<BattleUi>("../CanvasLayer");
             _targetSelector.SelectedTargetChanged += _battleUi.UpdateTargetHud;
             _targetSelector.EnableChanged += _battleUi.ShowTargetHud;
             SetupTroop(_troop);
             _battleUi.InitUnitHuds(EnumerateUnits());
+            _actionDispatcher.AllActionsFinished += AllActionFinished;
             StartPartyTurn();
         }
 
@@ -78,9 +79,9 @@ namespace Rpg2d.Battle
         {
         }
 
-        public void ActionFinished(BattleAction action)
+        public void AllActionFinished()
         {
-            if (!EnumerateUnits().Any(unit => unit.CanAct))
+            if (!EnumerateUnits().Any(unit => unit.CanAct || unit.IsActing))
             {
                 StartEnemyTurn();
             }
@@ -89,7 +90,7 @@ namespace Rpg2d.Battle
         private async void StartEnemyTurn()
         {
             _targetSelector.Enabled = false;
-            await ToSignal(GetTree().CreateTimer(3), "timeout");
+            await ToSignal(GetTree().CreateTimer(1), "timeout");
             foreach (var enemy in _enemies)
             {
                 enemy.CanAct = true;
@@ -121,7 +122,6 @@ namespace Rpg2d.Battle
                     }
                 }
             }
-            StartPartyTurn();
         }
 
         public IEnumerable<UnitSlot> EnumerateUnits()
