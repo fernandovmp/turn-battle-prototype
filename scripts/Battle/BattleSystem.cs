@@ -72,8 +72,8 @@ namespace Rpg2d.Battle
 
         private void StartPartyTurn()
         {
-            _leftUnit.CanAct = true;
-            _upUnit.CanAct = true;
+            _leftUnit.ActionEnabled = true;
+            _upUnit.ActionEnabled = true;
             _targetSelector.Enabled = true;
             _partyTurn = true;
         }
@@ -109,7 +109,7 @@ namespace Rpg2d.Battle
             await ToSignal(GetTree().CreateTimer(1), "timeout");
             foreach (var enemy in _enemies)
             {
-                enemy.CanAct = true;
+                enemy.ActionEnabled = true;
             }
             var ai = _troop.AI;
             var actions = ai.GetActions(new BattleContext

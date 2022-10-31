@@ -12,8 +12,10 @@ namespace Rpg2d.Battle
         private AnimatedSprite _animatedSprite;
         private BattleUnit _unit;
         private BattleAction _selectedAction = new BattleAction();
-        public bool CanAct { get; set; }
+        public bool CanAct => !IsDead && ActionEnabled;
+        public bool ActionEnabled { get; set; }
         public bool IsActing { get; set; }
+        public bool IsDead { get; set; }
         public Action<BattleAction> ActionFinished { get; set; }
         public IBattler Battler => _unit;
 
@@ -41,7 +43,7 @@ namespace Rpg2d.Battle
 
         public void PerformAction(BattleAction action)
         {
-            CanAct = false;
+            ActionEnabled = false;
             IsActing = true;
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
             _animatedSprite.Play(action.Skill.ActionAnimation);
@@ -80,6 +82,8 @@ namespace Rpg2d.Battle
 
         private void OnDied()
         {
+            _animatedSprite.Animation = "dead";
+            IsDead = true;
             Died?.Invoke();
         }
 

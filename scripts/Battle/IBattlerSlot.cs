@@ -9,6 +9,8 @@ namespace Rpg2d.Battle
         Action Died { get; set; }
         bool CanAct { get; }
         bool IsActing { get; }
+        bool ActionEnabled { get; set; }
+        bool IsDead { get; set; }
         void PerformAction(BattleAction action);
     }
 }

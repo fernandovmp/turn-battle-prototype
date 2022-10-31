@@ -12,7 +12,7 @@ namespace Rpg2d.Battle
 
         public override IEnumerator<BattleAction> GetActions(BattleContext context)
         {
-            foreach (var entity in context.Enemies)
+            foreach (var entity in context.Enemies.Where(e => e.CanAct))
             {
                 IBattlerSlot target = context.Party.FirstOrDefault(unit => unit.Battler.Hp > 0);
                 if (target != null)
