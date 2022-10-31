@@ -1,5 +1,6 @@
 using Godot;
 using Rpg2d.UI.Battle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,7 @@ namespace Rpg2d.Battle
         private TargetSelector _targetSelector;
         private BattleUi _battleUi;
         private IActionDispatcher _actionDispatcher = new ActionDispatcher();
+        private bool _partyTurn;
         public override void _Ready()
         {
             var partyNode = GetNode("../Party");
@@ -53,7 +55,7 @@ namespace Rpg2d.Battle
                 var enemySlot = enemyNode.GetNode<EnemySlot>(".");
                 node2D.Position = troop.Positions[i];
                 enemySlot.SetEnemy(troop.Enemies[i]);
-                enemySlot.ActionFinished = EnemyActionFinished;
+                enemySlot.ActionDispatcher = _actionDispatcher;
                 _enemies.Add(enemySlot);
             }
             _targetSelector.Init(_enemies);
@@ -73,6 +75,7 @@ namespace Rpg2d.Battle
             _leftUnit.CanAct = true;
             _upUnit.CanAct = true;
             _targetSelector.Enabled = true;
+            _partyTurn = true;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -81,14 +84,27 @@ namespace Rpg2d.Battle
 
         public void AllActionFinished()
         {
-            if (!EnumerateUnits().Any(unit => unit.CanAct || unit.IsActing))
+            IEnumerable<IBattlerSlot> slots;
+            Action callback;
+            if (_partyTurn)
             {
-                StartEnemyTurn();
+                slots = EnumerateUnits();
+                callback = StartEnemyTurn;
+            }
+            else
+            {
+                slots = _enemies;
+                callback = StartPartyTurn;
+            }
+            if (!slots.Any(unit => unit.CanAct || unit.IsActing))
+            {
+                callback();
             }
         }
 
         private async void StartEnemyTurn()
         {
+            _partyTurn = false;
             _targetSelector.Enabled = false;
             await ToSignal(GetTree().CreateTimer(1), "timeout");
             foreach (var enemy in _enemies)
