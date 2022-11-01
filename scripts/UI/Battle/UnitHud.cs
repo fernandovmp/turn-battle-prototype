@@ -25,14 +25,19 @@ namespace Rpg2d.UI.Battle
             }
             _unit = unit;
             _unit.Died += Update;
-            _unit.DamageRecived += Update;
+            _unit.DamageRecived += DamageRecived;
+            Update();
+        }
+
+        private void DamageRecived(SlotDamageRecivedArgs obj)
+        {
             Update();
         }
 
         private void RemoveUnit()
         {
             _unit.Died -= Update;
-            _unit.DamageRecived -= Update;
+            _unit.DamageRecived -= DamageRecived;
         }
 
         public void Update()

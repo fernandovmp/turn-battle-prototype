@@ -54,6 +54,7 @@ namespace Rpg2d.Battle
                 enemySlot.SetEnemy(troop.Enemies[i]);
                 enemySlot.ActionDispatcher = _actionDispatcher;
                 enemySlot.Died += _targetSelector.Next;
+                enemySlot.DamageRecived += _battleUi.DisplayDamageText;
                 _enemies.Add(enemySlot);
             }
             _targetSelector.Init(_enemies);

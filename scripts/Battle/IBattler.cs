@@ -9,7 +9,7 @@ namespace Rpg2d.Battle
         int Hp { get; set; }
         int Attack { get; }
 
-        Action DamageRecived { get; set; }
+        Action<BattlerDamageRecivedArgs> DamageRecived { get; set; }
         Action Died { get; set; }
 
 

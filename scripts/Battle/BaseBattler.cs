@@ -12,7 +12,7 @@ namespace Rpg2d.Battle
         public int Attack { get; set; }
         public SpriteFrames AnimationFrames { get; set; }
         public Skill AttackSkill { get; set; }
-        public Action DamageRecived { get; set; }
+        public Action<BattlerDamageRecivedArgs> DamageRecived { get; set; }
         public Action Died { get; set; }
 
         public void DealDamage(int damage)
@@ -23,7 +23,10 @@ namespace Rpg2d.Battle
                 Hp = 0;
                 Died?.Invoke();
             }
-            DamageRecived?.Invoke();
+            DamageRecived?.Invoke(new BattlerDamageRecivedArgs
+            {
+                Damage = damage
+            });
         }
     }
 }

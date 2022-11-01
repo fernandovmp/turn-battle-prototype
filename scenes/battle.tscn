@@ -123,6 +123,10 @@ margin_left = 30.0
 margin_top = -77.0
 margin_right = 1002.0
 
+[node name="DamageTextContainer" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
 [node name="BattleSystem" type="Node" parent="."]
 script = ExtResource( 4 )
 _enemyModel = ExtResource( 5 )

@@ -19,7 +19,7 @@ namespace Rpg2d.Battle
         public Action<BattleAction> ActionFinished { get; set; }
         public IBattler Battler => _unit;
 
-        public Action DamageRecived { get; set; }
+        public Action<SlotDamageRecivedArgs> DamageRecived { get; set; }
         public Action Died { get; set; }
 
         private TargetSelector _targetSelector;
@@ -87,9 +87,9 @@ namespace Rpg2d.Battle
             Died?.Invoke();
         }
 
-        private void OnDamageRecived()
+        private void OnDamageRecived(BattlerDamageRecivedArgs args)
         {
-            DamageRecived?.Invoke();
+            DamageRecived?.Invoke(new SlotDamageRecivedArgs(this, args.Damage, 0));
         }
 
         public void DealDamage(int damage)

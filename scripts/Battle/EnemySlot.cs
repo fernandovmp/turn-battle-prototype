@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Rpg2d.Battle
 {
-    public class EnemySlot : Node, IBattlerSlot
+    public class EnemySlot : Node2D, IBattlerSlot
     {
         private AnimatedSprite _animatedSprite;
         private BattleEnemy _enemy;
@@ -12,7 +12,7 @@ namespace Rpg2d.Battle
         public bool CanAct => !IsDead && ActionEnabled;
         public Action<BattleAction> ActionFinished { get; set; }
         public IBattler Battler => _enemy;
-        public Action DamageRecived { get; set; }
+        public Action<SlotDamageRecivedArgs> DamageRecived { get; set; }
         public Action Died { get; set; }
         public bool IsActing { get; set; }
 
@@ -45,10 +45,9 @@ namespace Rpg2d.Battle
             Died?.Invoke();
         }
 
-        private void OnDamageRecived()
+        private void OnDamageRecived(BattlerDamageRecivedArgs args)
         {
-            GD.Print($"HITS: {_hitCounter.Hits}");
-            DamageRecived?.Invoke();
+            DamageRecived?.Invoke(new SlotDamageRecivedArgs(this, args.Damage, _hitCounter.Hits));
         }
 
         public void PerformAction(BattleAction action)
