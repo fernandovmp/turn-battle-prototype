@@ -13,33 +13,29 @@ namespace Rpg2d.Battle
         private UnitSlot _upUnit;
         private Node _enemiesRoot;
         [Export]
-        private UnitResource _partyLeftUnit;
-        [Export]
-        private UnitResource _partyUpUnit;
-        [Export]
-        private EnemyTroopResource _troop;
-        [Export]
         private PackedScene _enemyModel;
         private List<EnemySlot> _enemies = new List<EnemySlot>();
         private TargetSelector _targetSelector;
         private BattleUi _battleUi;
         private IActionDispatcher _actionDispatcher = new ActionDispatcher();
         private bool _partyTurn;
-        public override void _Ready()
+        private EnemyTroopResource _troop;
+
+        public void Init(BattleSystemContext context)
         {
             var partyNode = GetNode("../Party");
             _enemiesRoot = GetNode("../Enemies");
             _leftUnit = partyNode.GetNode<UnitSlot>("LeftUnit");
             _upUnit = partyNode.GetNode<UnitSlot>("UpUnit");
-            _leftUnit.SetUnit(_partyLeftUnit);
+            _leftUnit.SetUnit(context.PartyLeftUnit);
             _leftUnit.ActionDispatcher = _actionDispatcher;
-            _upUnit.SetUnit(_partyUpUnit);
+            _upUnit.SetUnit(context.PartyUpUnit);
             _upUnit.ActionDispatcher = _actionDispatcher;
             _targetSelector = GetNode<TargetSelector>("../TargetSelector");
             _battleUi = GetNode<BattleUi>("../CanvasLayer");
             _targetSelector.SelectedTargetChanged += _battleUi.UpdateTargetHud;
             _targetSelector.EnableChanged += _battleUi.ShowTargetHud;
-            SetupTroop(_troop);
+            SetupTroop(context.Troop);
             _battleUi.InitUnitHuds(EnumerateUnits());
             _actionDispatcher.AllActionsFinished += AllActionFinished;
             StartPartyTurn();
@@ -47,6 +43,7 @@ namespace Rpg2d.Battle
 
         private void SetupTroop(EnemyTroopResource troop)
         {
+            _troop = troop;
             for (int i = 0; i < troop.Enemies.Length; i++)
             {
                 var enemyNode = _enemyModel.Instance();

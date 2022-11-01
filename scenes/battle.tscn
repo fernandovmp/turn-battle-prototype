@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/Battle/UnitSlot.cs" type="Script" id=1]
 [ext_resource path="res://sprites/unit01.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scripts/Battle/TargetSelector.cs" type="Script" id=8]
 [ext_resource path="res://scripts/UI/Battle/BattleUi.cs" type="Script" id=9]
 [ext_resource path="res://scenes/battle/UnitHud.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/Battle/BattleScene.cs" type="Script" id=11]
 
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
@@ -69,6 +70,10 @@ animations = [ {
 } ]
 
 [node name="Root" type="Node2D"]
+script = ExtResource( 11 )
+_partyLeftUnit = ExtResource( 3 )
+_partyUpUnit = ExtResource( 3 )
+_troop = ExtResource( 6 )
 
 [node name="Party" type="Node" parent="."]
 
@@ -120,7 +125,4 @@ margin_right = 1002.0
 
 [node name="BattleSystem" type="Node" parent="."]
 script = ExtResource( 4 )
-_partyLeftUnit = ExtResource( 3 )
-_partyUpUnit = ExtResource( 3 )
-_troop = ExtResource( 6 )
 _enemyModel = ExtResource( 5 )
