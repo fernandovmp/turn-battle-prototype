@@ -21,7 +21,7 @@ namespace Rpg2d.Skills
 
         public void Cast(CastContext context)
         {
-            int damage = context.Target.Attack + Damage;
+            int damage = context.Target.Battler.Attack + Damage;
             context.Target.DealDamage(damage);
         }
     }

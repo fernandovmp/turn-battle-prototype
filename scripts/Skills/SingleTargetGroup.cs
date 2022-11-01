@@ -11,9 +11,9 @@ namespace Rpg2d.Skills
             _target = target;
         }
 
-        public IEnumerable<IBattler> GetTargets()
+        public IEnumerable<IBattlerSlot> GetTargets()
         {
-            yield return _target.Battler;
+            yield return _target;
         }
     }
 }

@@ -129,7 +129,7 @@ namespace Rpg2d.Battle
                     {
                         action.Skill.Cast(new Skills.CastContext
                         {
-                            Caster = action.Owner.Battler,
+                            Caster = action.Owner,
                             Skill = action.Skill,
                             Target = target
                         });

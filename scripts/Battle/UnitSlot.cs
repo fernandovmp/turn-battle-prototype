@@ -51,7 +51,7 @@ namespace Rpg2d.Battle
             {
                 action.Skill.Cast(new Skills.CastContext
                 {
-                    Caster = _unit,
+                    Caster = this,
                     Skill = action.Skill,
                     Target = _targetSelector.GetSelected()
                 });
@@ -90,6 +90,11 @@ namespace Rpg2d.Battle
         private void OnDamageRecived()
         {
             DamageRecived?.Invoke();
+        }
+
+        public void DealDamage(int damage)
+        {
+            Battler.DealDamage(damage);
         }
     }
 }

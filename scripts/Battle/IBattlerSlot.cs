@@ -12,5 +12,6 @@ namespace Rpg2d.Battle
         bool ActionEnabled { get; set; }
         bool IsDead { get; set; }
         void PerformAction(BattleAction action);
+        void DealDamage(int damage);
     }
 }

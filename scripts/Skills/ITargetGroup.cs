@@ -8,6 +8,6 @@ namespace Rpg2d.Skills
 {
     public interface ITargetGroup
     {
-        IEnumerable<IBattler> GetTargets();
+        IEnumerable<IBattlerSlot> GetTargets();
     }
 }

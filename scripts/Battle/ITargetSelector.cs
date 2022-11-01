@@ -7,7 +7,7 @@ namespace Rpg2d.Battle
         void First();
         void Next();
         void Previous();
-        IBattler GetSelected();
+        IBattlerSlot GetSelected();
         Action<IBattlerSlot> SelectedTargetChanged { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace Rpg2d.Battle
         public IActionDispatcher ActionDispatcher { get; set; }
         public bool ActionEnabled { get; set; }
         public bool IsDead { get; set; }
+        private HitCounter _hitCounter = new HitCounter();
 
         public override void _Ready()
         {
@@ -35,6 +36,7 @@ namespace Rpg2d.Battle
             _selectedAction.Reset(_enemy.AttackSkill);
             _enemy.DamageRecived += OnDamageRecived;
             _enemy.Died += OnDied;
+            _hitCounter.Init();
         }
 
         private void OnDied()
@@ -45,6 +47,7 @@ namespace Rpg2d.Battle
 
         private void OnDamageRecived()
         {
+            GD.Print($"HITS: {_hitCounter.Hits}");
             DamageRecived?.Invoke();
         }
 
@@ -66,6 +69,13 @@ namespace Rpg2d.Battle
             _actionTaskCompletionSource.SetResult(_selectedAction);
             _selectedAction.Reset(_enemy.AttackSkill);
             _animatedSprite.Animation = _enemy.AttackSkill.IdleAnimation;
+        }
+
+        public void DealDamage(int damage)
+        {
+            int hits = _hitCounter.CountHit();
+            float hitModifier = 1 + 0.2f * (hits - 1);
+            Battler.DealDamage((int)(damage * hitModifier));
         }
     }
 }
