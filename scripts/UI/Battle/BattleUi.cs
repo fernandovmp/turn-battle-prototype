@@ -11,6 +11,7 @@ namespace Rpg2d.UI.Battle
         private PackedScene _unitHudModel;
         private Control _targetHudRoot;
         private Control _damageTextRoot;
+        private Dictionary<IBattlerSlot, HitLabel> _hitLabelDictionary = new Dictionary<IBattlerSlot, HitLabel>();
 
         public void InitUnitHuds(IEnumerable<UnitSlot> units)
         {
@@ -55,6 +56,27 @@ namespace Rpg2d.UI.Battle
             damageLabel.AddFontOverride("font", font);
             _damageTextRoot.AddChild(damageLabel);
             damageLabel.DestroyAfter(1f);
+            if (args.HitCount > 1)
+            {
+                DisplayHitCount(args.Slot, args.HitCount, position);
+            }
+        }
+
+        private void DisplayHitCount(IBattlerSlot slot, int hitCount, Vector2 position)
+        {
+            var hasValue = _hitLabelDictionary.TryGetValue(slot, out HitLabel hitLabel);
+            if (!hasValue)
+            {
+                hitLabel = new HitLabel();
+                var font = new DynamicFont();
+                font.FontData = ResourceLoader.Load<DynamicFontData>("res://fonts/Roboto-Regular.ttf");
+                font.Size = 26;
+                hitLabel.AddFontOverride("font", font);
+                hitLabel.RectGlobalPosition = position + new Vector2(0, -50);
+                AddChild(hitLabel);
+                _hitLabelDictionary.Add(slot, hitLabel);
+            }
+            hitLabel.ShowHitCount(hitCount);
         }
 
         public void UpdateTargetHud(IBattlerSlot target)
