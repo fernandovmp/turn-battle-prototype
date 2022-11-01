@@ -9,6 +9,10 @@ namespace Rpg2d.Battle
         [Export]
         private UnitResource _partyUpUnit;
         [Export]
+        private UnitResource _partyRightUnit;
+        [Export]
+        private UnitResource _partyBottomUnit;
+        [Export]
         private EnemyTroopResource _troop;
 
         public override void _Ready()
@@ -18,6 +22,8 @@ namespace Rpg2d.Battle
             {
                 PartyLeftUnit = _partyLeftUnit,
                 PartyUpUnit = _partyUpUnit,
+                PartyRightUnit = _partyRightUnit,
+                PartyBottomUnit = _partyBottomUnit,
                 Troop = _troop
             });
         }

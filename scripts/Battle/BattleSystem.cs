@@ -11,6 +11,8 @@ namespace Rpg2d.Battle
 
         private UnitSlot _leftUnit;
         private UnitSlot _upUnit;
+        private UnitSlot _rightUnit;
+        private UnitSlot _bottomUnit;
         private Node _enemiesRoot;
         [Export]
         private PackedScene _enemyModel;
@@ -27,10 +29,12 @@ namespace Rpg2d.Battle
             _enemiesRoot = GetNode("../Enemies");
             _leftUnit = partyNode.GetNode<UnitSlot>("LeftUnit");
             _upUnit = partyNode.GetNode<UnitSlot>("UpUnit");
-            _leftUnit.SetUnit(context.PartyLeftUnit);
-            _leftUnit.ActionDispatcher = _actionDispatcher;
-            _upUnit.SetUnit(context.PartyUpUnit);
-            _upUnit.ActionDispatcher = _actionDispatcher;
+            _rightUnit = partyNode.GetNode<UnitSlot>("RightUnit");
+            _bottomUnit = partyNode.GetNode<UnitSlot>("BottomUnit");
+            SetupUnit(_leftUnit, context.PartyLeftUnit);
+            SetupUnit(_upUnit, context.PartyUpUnit);
+            SetupUnit(_rightUnit, context.PartyRightUnit);
+            SetupUnit(_bottomUnit, context.PartyBottomUnit);
             _targetSelector = GetNode<TargetSelector>("../TargetSelector");
             _battleUi = GetNode<BattleUi>("../CanvasLayer");
             _targetSelector.SelectedTargetChanged += _battleUi.UpdateTargetHud;
@@ -39,6 +43,15 @@ namespace Rpg2d.Battle
             _battleUi.InitUnitHuds(EnumerateUnits());
             _actionDispatcher.AllActionsFinished += AllActionFinished;
             StartPartyTurn();
+        }
+
+        private void SetupUnit(UnitSlot unit, UnitResource unitResource)
+        {
+            if (unitResource != null)
+            {
+                unit.SetUnit(unitResource);
+            }
+            unit.ActionDispatcher = _actionDispatcher;
         }
 
         private void SetupTroop(EnemyTroopResource troop)
@@ -70,8 +83,10 @@ namespace Rpg2d.Battle
 
         private void StartPartyTurn()
         {
-            _leftUnit.ActionEnabled = true;
-            _upUnit.ActionEnabled = true;
+            foreach (var unit in EnumerateUnits())
+            {
+                unit.ActionEnabled = true;
+            }
             _targetSelector.Enabled = true;
             _partyTurn = true;
             _targetSelector.First();
@@ -139,10 +154,14 @@ namespace Rpg2d.Battle
             }
         }
 
-        public IEnumerable<UnitSlot> EnumerateUnits()
+        public IEnumerable<UnitSlot> EnumerateUnits() => EnumerateAllUnits().Where(unit => unit.HasUnit);
+
+        public IEnumerable<UnitSlot> EnumerateAllUnits()
         {
             yield return _leftUnit;
             yield return _upUnit;
+            yield return _rightUnit;
+            yield return _bottomUnit;
         }
     }
 }

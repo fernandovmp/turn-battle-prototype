@@ -12,10 +12,11 @@ namespace Rpg2d.Battle
         private AnimatedSprite _animatedSprite;
         private BattleUnit _unit;
         private BattleAction _selectedAction = new BattleAction();
-        public bool CanAct => !IsDead && ActionEnabled;
+        public bool CanAct => !IsDead && ActionEnabled && HasUnit;
         public bool ActionEnabled { get; set; }
         public bool IsActing { get; set; }
         public bool IsDead { get; set; }
+        public bool HasUnit { get; set; }
         public Action<BattleAction> ActionFinished { get; set; }
         public IBattler Battler => _unit;
 
@@ -78,6 +79,7 @@ namespace Rpg2d.Battle
             _selectedAction.Reset(_unit.AttackSkill);
             _unit.DamageRecived += OnDamageRecived;
             _unit.Died += OnDied;
+            HasUnit = true;
         }
 
         private void OnDied()
