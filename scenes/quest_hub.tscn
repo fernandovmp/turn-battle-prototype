@@ -1,18 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/UI/QuestHub/QuestHubScene.cs" type="Script" id=1]
 [ext_resource path="res://scenes/QuestHub/QuestItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/quests/quest01.tres" type="Resource" id=3]
 [ext_resource path="res://resources/units/unit01.tres" type="Resource" id=4]
+[ext_resource path="res://resources/units/unit04.tres" type="Resource" id=5]
+[ext_resource path="res://resources/units/unit02.tres" type="Resource" id=6]
+[ext_resource path="res://resources/units/unit03.tres" type="Resource" id=7]
+[ext_resource path="res://resources/quests/quest02.tres" type="Resource" id=8]
+[ext_resource path="res://resources/quests/quest03.tres" type="Resource" id=9]
 
 [node name="Root" type="Node"]
 script = ExtResource( 1 )
-_quests = [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
+_quests = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ) ]
 _questItemModel = ExtResource( 2 )
 _partyLeftUnit = ExtResource( 4 )
-_partyUpUnit = ExtResource( 4 )
-_partyRightUnit = ExtResource( 4 )
-_partyBottomUnit = ExtResource( 4 )
+_partyUpUnit = ExtResource( 6 )
+_partyRightUnit = ExtResource( 5 )
+_partyBottomUnit = ExtResource( 7 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

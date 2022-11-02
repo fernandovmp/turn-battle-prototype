@@ -14,7 +14,10 @@ namespace Rpg2d.Battle
         {
             foreach (var entity in context.Enemies.Where(e => e.CanAct))
             {
-                IBattlerSlot target = context.Party.FirstOrDefault(unit => unit.Battler.Hp > 0);
+                var units = context.Party.Where(unit => unit.Battler.Hp > 0);
+                int index = (int)Godot.GD.RandRange(0, units.Count() - 1);
+                IBattlerSlot target = units.ElementAt(index);
+
                 if (target != null)
                 {
                     yield return new BattleAction
