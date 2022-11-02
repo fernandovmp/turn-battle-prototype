@@ -42,6 +42,7 @@ namespace Rpg2d.Battle
         private void OnDied()
         {
             IsDead = true;
+            _animatedSprite.Animation = "dead";
             Died?.Invoke();
         }
 

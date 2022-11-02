@@ -47,8 +47,9 @@ namespace Rpg2d.UI.Battle
                 _damageTextRoot = GetNode<Control>("DamageTextContainer");
             }
             Vector2 position;
-            if (args.Slot is Node2D slotNode)
+            if (args.Slot is EnemySlot enemySlot)
             {
+                var slotNode = enemySlot.GetNode<AnimatedSprite>("AnimatedSprite");
                 position = slotNode.GlobalPosition + new Vector2(100, 0);
             }
             else if (args.Slot is UnitSlot unitSlot)
