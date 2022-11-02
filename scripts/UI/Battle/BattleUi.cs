@@ -12,10 +12,54 @@ namespace Rpg2d.UI.Battle
         private Control _targetHudRoot;
         private Control _damageTextRoot;
         private Dictionary<IBattlerSlot, HitLabel> _hitLabelDictionary = new Dictionary<IBattlerSlot, HitLabel>();
+        private BattleSystem _battleSystem;
+
+        public void SetBattleSystem(BattleSystem battleSystem)
+        {
+            _battleSystem = battleSystem;
+            _battleSystem.PhaseChanged += BattlePhaseChanged;
+        }
+
+        private void BattlePhaseChanged(BattlePhaseEnum phase)
+        {
+            switch (phase)
+            {
+                case BattlePhaseEnum.Undefined:
+                    break;
+                case BattlePhaseEnum.Initialization:
+                    InitUnitHuds(_battleSystem.EnumerateUnits());
+                    _battleSystem.TargetSelector.SelectedTargetChanged += UpdateTargetHud;
+                    _battleSystem.TargetSelector.EnableChanged += ShowTargetHud;
+                    foreach (var enemySlot in _battleSystem.Enemies)
+                    {
+                        enemySlot.DamageRecived += DisplayDamageText;
+                    }
+                    GetNode<Control>("BattleUI").Visible = true;
+                    break;
+                case BattlePhaseEnum.PartyTurn:
+                    break;
+                case BattlePhaseEnum.EnemyTurn:
+                    break;
+                case BattlePhaseEnum.PartyVictory:
+                    ShowResult("Victory");
+                    break;
+                case BattlePhaseEnum.EnemyVictory:
+                    ShowResult("Defeated");
+                    break;
+            }
+        }
+
+        private void ShowResult(string title)
+        {
+            GetNode<Control>("BattleUI").Visible = false;
+            var resultUi = GetNode<Control>("ResultUI");
+            resultUi.Visible = true;
+            resultUi.GetNode<Label>("TitleLabel").Text = title;
+        }
 
         public void InitUnitHuds(IEnumerable<UnitSlot> units)
         {
-            var hudRoot = GetNode<Node>("UnitHudContainer");
+            var hudRoot = GetNode<Node>("BattleUI/UnitHudContainer");
             foreach (var unit in units)
             {
                 var hudNode = _unitHudModel.Instance();
@@ -31,7 +75,7 @@ namespace Rpg2d.UI.Battle
         {
             if (_damageTextRoot == null)
             {
-                _damageTextRoot = GetNode<Control>("DamageTextContainer");
+                _damageTextRoot = GetNode<Control>("BattleUI/DamageTextContainer");
             }
             Vector2 position;
             if (args.Slot is Node2D slotNode)
@@ -83,7 +127,7 @@ namespace Rpg2d.UI.Battle
         {
             if (_targetHudRoot == null)
             {
-                _targetHudRoot = GetNode<Control>("TargetHudContainer");
+                _targetHudRoot = GetNode<Control>("BattleUI/TargetHudContainer");
             }
             var hud = _targetHudRoot.GetNodeOrNull<UnitHud>("TargetHud");
             if (hud == null)
@@ -102,7 +146,7 @@ namespace Rpg2d.UI.Battle
         {
             if (_targetHudRoot == null)
             {
-                _targetHudRoot = GetNode<Control>("TargetHudContainer");
+                _targetHudRoot = GetNode<Control>("BattleUI/TargetHudContainer");
             }
             _targetHudRoot.Visible = show;
         }

@@ -18,10 +18,21 @@ namespace Rpg2d.Battle
         private PackedScene _enemyModel;
         private List<EnemySlot> _enemies = new List<EnemySlot>();
         private TargetSelector _targetSelector;
-        private BattleUi _battleUi;
         private IActionDispatcher _actionDispatcher = new ActionDispatcher();
-        private bool _partyTurn;
         private EnemyTroopResource _troop;
+        private BattlePhaseEnum _phase;
+        public BattlePhaseEnum Phase
+        {
+            get => _phase;
+            set
+            {
+                _phase = value;
+                PhaseChanged?.Invoke(value);
+            }
+        }
+        public Action<BattlePhaseEnum> PhaseChanged;
+        public TargetSelector TargetSelector => _targetSelector;
+        public IEnumerable<EnemySlot> Enemies => _enemies;
 
         public void Init(BattleSystemContext context)
         {
@@ -36,12 +47,10 @@ namespace Rpg2d.Battle
             SetupUnit(_rightUnit, context.PartyRightUnit);
             SetupUnit(_bottomUnit, context.PartyBottomUnit);
             _targetSelector = GetNode<TargetSelector>("../TargetSelector");
-            _battleUi = GetNode<BattleUi>("../CanvasLayer");
-            _targetSelector.SelectedTargetChanged += _battleUi.UpdateTargetHud;
-            _targetSelector.EnableChanged += _battleUi.ShowTargetHud;
+
             SetupTroop(context.Troop);
-            _battleUi.InitUnitHuds(EnumerateUnits());
             _actionDispatcher.AllActionsFinished += AllActionFinished;
+            Phase = BattlePhaseEnum.Initialization;
             StartPartyTurn();
         }
 
@@ -67,7 +76,6 @@ namespace Rpg2d.Battle
                 enemySlot.SetEnemy(troop.Enemies[i]);
                 enemySlot.ActionDispatcher = _actionDispatcher;
                 enemySlot.Died += _targetSelector.Next;
-                enemySlot.DamageRecived += _battleUi.DisplayDamageText;
                 _enemies.Add(enemySlot);
             }
             _targetSelector.Init(_enemies);
@@ -88,8 +96,8 @@ namespace Rpg2d.Battle
                 unit.ActionEnabled = true;
             }
             _targetSelector.Enabled = true;
-            _partyTurn = true;
             _targetSelector.First();
+            Phase = BattlePhaseEnum.PartyTurn;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -98,27 +106,40 @@ namespace Rpg2d.Battle
 
         public void AllActionFinished()
         {
-            IEnumerable<IBattlerSlot> slots;
-            Action callback;
-            if (_partyTurn)
+            if (EnumerateUnits().All(unit => unit.IsDead))
             {
-                slots = EnumerateUnits();
-                callback = StartEnemyTurn;
+                Phase = BattlePhaseEnum.EnemyVictory;
+                TargetSelector.Enabled = false;
             }
-            else
+            else if (_enemies.All(unit => unit.IsDead))
             {
-                slots = _enemies;
-                callback = StartPartyTurn;
+                Phase = BattlePhaseEnum.PartyVictory;
+                TargetSelector.Enabled = false;
             }
-            if (!slots.Any(unit => unit.CanAct || unit.IsActing))
+            if (Phase == BattlePhaseEnum.PartyTurn || Phase == BattlePhaseEnum.EnemyTurn)
             {
-                callback();
+                IEnumerable<IBattlerSlot> slots;
+                Action callback;
+                if (Phase == BattlePhaseEnum.PartyTurn)
+                {
+                    slots = EnumerateUnits();
+                    callback = StartEnemyTurn;
+                }
+                else
+                {
+                    slots = _enemies;
+                    callback = StartPartyTurn;
+                }
+                if (!slots.Any(unit => unit.CanAct || unit.IsActing))
+                {
+                    callback();
+                }
             }
         }
 
         private async void StartEnemyTurn()
         {
-            _partyTurn = false;
+            Phase = BattlePhaseEnum.EnemyTurn;
             _targetSelector.Enabled = false;
             await ToSignal(GetTree().CreateTimer(1), "timeout");
             foreach (var enemy in _enemies)
