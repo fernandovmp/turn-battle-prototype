@@ -1,11 +1,10 @@
 using Godot;
 using Rpg2d.Battle;
-using System;
 using System.Collections.Generic;
 
 namespace Rpg2d.UI.Battle
 {
-    public class BattleUi : Node
+    public class BattleUi : Control
     {
         [Export]
         private PackedScene _unitHudModel;
@@ -14,52 +13,22 @@ namespace Rpg2d.UI.Battle
         private Dictionary<IBattlerSlot, HitLabel> _hitLabelDictionary = new Dictionary<IBattlerSlot, HitLabel>();
         private BattleSystem _battleSystem;
 
-        public void SetBattleSystem(BattleSystem battleSystem)
+        public void Init(BattleSystem battleSystem)
         {
             _battleSystem = battleSystem;
-            _battleSystem.PhaseChanged += BattlePhaseChanged;
-        }
-
-        private void BattlePhaseChanged(BattlePhaseEnum phase)
-        {
-            switch (phase)
+            InitUnitHuds(_battleSystem.EnumerateUnits());
+            _battleSystem.TargetSelector.SelectedTargetChanged += UpdateTargetHud;
+            _battleSystem.TargetSelector.EnableChanged += ShowTargetHud;
+            foreach (var enemySlot in _battleSystem.Enemies)
             {
-                case BattlePhaseEnum.Undefined:
-                    break;
-                case BattlePhaseEnum.Initialization:
-                    InitUnitHuds(_battleSystem.EnumerateUnits());
-                    _battleSystem.TargetSelector.SelectedTargetChanged += UpdateTargetHud;
-                    _battleSystem.TargetSelector.EnableChanged += ShowTargetHud;
-                    foreach (var enemySlot in _battleSystem.Enemies)
-                    {
-                        enemySlot.DamageRecived += DisplayDamageText;
-                    }
-                    GetNode<Control>("BattleUI").Visible = true;
-                    break;
-                case BattlePhaseEnum.PartyTurn:
-                    break;
-                case BattlePhaseEnum.EnemyTurn:
-                    break;
-                case BattlePhaseEnum.PartyVictory:
-                    ShowResult("Victory");
-                    break;
-                case BattlePhaseEnum.EnemyVictory:
-                    ShowResult("Defeated");
-                    break;
+                enemySlot.DamageRecived += DisplayDamageText;
             }
-        }
-
-        private void ShowResult(string title)
-        {
-            GetNode<Control>("BattleUI").Visible = false;
-            var resultUi = GetNode<Control>("ResultUI");
-            resultUi.Visible = true;
-            resultUi.GetNode<Label>("TitleLabel").Text = title;
+            Visible = true;
         }
 
         public void InitUnitHuds(IEnumerable<UnitSlot> units)
         {
-            var hudRoot = GetNode<Node>("BattleUI/UnitHudContainer");
+            var hudRoot = GetNode<Node>("UnitHudContainer");
             foreach (var unit in units)
             {
                 var hudNode = _unitHudModel.Instance();
@@ -75,7 +44,7 @@ namespace Rpg2d.UI.Battle
         {
             if (_damageTextRoot == null)
             {
-                _damageTextRoot = GetNode<Control>("BattleUI/DamageTextContainer");
+                _damageTextRoot = GetNode<Control>("DamageTextContainer");
             }
             Vector2 position;
             if (args.Slot is Node2D slotNode)
@@ -127,7 +96,7 @@ namespace Rpg2d.UI.Battle
         {
             if (_targetHudRoot == null)
             {
-                _targetHudRoot = GetNode<Control>("BattleUI/TargetHudContainer");
+                _targetHudRoot = GetNode<Control>("TargetHudContainer");
             }
             var hud = _targetHudRoot.GetNodeOrNull<UnitHud>("TargetHud");
             if (hud == null)
@@ -146,7 +115,7 @@ namespace Rpg2d.UI.Battle
         {
             if (_targetHudRoot == null)
             {
-                _targetHudRoot = GetNode<Control>("BattleUI/TargetHudContainer");
+                _targetHudRoot = GetNode<Control>("TargetHudContainer");
             }
             _targetHudRoot.Visible = show;
         }

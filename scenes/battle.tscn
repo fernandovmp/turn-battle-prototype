@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/Battle/UnitSlot.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/UI/Battle/ResultUI.cs" type="Script" id=3]
 [ext_resource path="res://scripts/Battle/BattleSystem.cs" type="Script" id=4]
 [ext_resource path="res://scenes/battle/EnemySlot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/UI/Battle/BattleUiController.cs" type="Script" id=6]
 [ext_resource path="res://sprites/arrow.png" type="Texture" id=7]
 [ext_resource path="res://scripts/Battle/TargetSelector.cs" type="Script" id=8]
 [ext_resource path="res://scripts/UI/Battle/BattleUi.cs" type="Script" id=9]
@@ -55,6 +57,9 @@ bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.705882 )
 
 [sub_resource type="DynamicFont" id=23]
 size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=24]
 font_data = ExtResource( 2 )
 
 [node name="Root" type="Node2D"]
@@ -109,13 +114,14 @@ position = Vector2( 56, 52 )
 frames = SubResource( 18 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource( 9 )
-_unitHudModel = ExtResource( 10 )
+script = ExtResource( 6 )
 
 [node name="BattleUI" type="Control" parent="CanvasLayer"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 9 )
+_unitHudModel = ExtResource( 10 )
 
 [node name="TargetHudContainer" type="Control" parent="CanvasLayer/BattleUI"]
 margin_left = 32.0
@@ -136,16 +142,16 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ResultUI" type="Panel" parent="CanvasLayer"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -359.0
-margin_top = -234.5
+margin_top = -66.5
 margin_right = 359.0
-margin_bottom = 234.5
+margin_bottom = 66.5
 custom_styles/panel = SubResource( 22 )
+script = ExtResource( 3 )
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/ResultUI"]
 anchor_left = 0.5
@@ -155,6 +161,19 @@ margin_right = 188.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 23 )
 text = "result_text"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/ResultUI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -109.0
+margin_top = -35.0
+margin_right = 109.0
+custom_fonts/font = SubResource( 24 )
+text = "Press [button] to continue"
 align = 1
 valign = 1
 

@@ -8,11 +8,11 @@ namespace Rpg2d.Battle
     {
         public override void _Ready()
         {
-            var battleUi = GetNode<BattleUi>("CanvasLayer");
+            var battleUiController = GetNode<BattleUiController>("CanvasLayer");
             var battleSystem = GetNode<BattleSystem>("BattleSystem");
             var repository = new MemoryCacheRepository();
             var context = repository.GetValue<BattleSystemContext>("battle_context");
-            battleUi.SetBattleSystem(battleSystem);
+            battleUiController.SetBattleSystem(battleSystem);
             battleSystem.Init(context);
         }
     }
