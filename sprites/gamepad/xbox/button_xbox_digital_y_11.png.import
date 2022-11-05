@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/button_xbox_digital_y_11.png-cea319182186e7acfd99c94352f1caa2.image"
+
+[deps]
+
+source_file="res://sprites/gamepad/xbox/button_xbox_digital_y_11.png"
+dest_files=[ "res://.import/button_xbox_digital_y_11.png-cea319182186e7acfd99c94352f1caa2.image" ]
+
+[params]
+

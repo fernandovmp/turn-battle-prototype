@@ -60,6 +60,7 @@ size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=24]
+size = 24
 font_data = ExtResource( 2 )
 
 [node name="Root" type="Node2D"]
@@ -172,18 +173,16 @@ text = "result_text"
 align = 1
 valign = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/ResultUI"]
-anchor_left = 0.5
+[node name="ContinueLabel" type="RichTextLabel" parent="CanvasLayer/ResultUI"]
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -109.0
-margin_top = -35.0
-margin_right = 109.0
-custom_fonts/font = SubResource( 24 )
-text = "Press [button] to continue"
-align = 1
-valign = 1
+margin_top = -28.0
+margin_bottom = 1.0
+custom_fonts/normal_font = SubResource( 24 )
+bbcode_enabled = true
+bbcode_text = "[center]press [button] to continue"
+text = "press [button] to continue"
 
 [node name="BattleSystem" type="Node" parent="."]
 script = ExtResource( 4 )
