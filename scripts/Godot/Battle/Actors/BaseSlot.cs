@@ -41,7 +41,7 @@ namespace Rpg2d.Godot.Battle.Actors
 
         protected void OnDamageRecived(BattlerDamageRecivedArgs args)
         {
-            DamageRecived?.Invoke(new SlotDamageRecivedArgs(this, args.Damage, 0));
+            DamageRecived?.Invoke(new SlotDamageRecivedArgs(this, args.Damage, _hitCounter.Hits));
         }
 
         public void DealDamage(int damage)
