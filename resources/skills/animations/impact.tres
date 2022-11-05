@@ -20,4 +20,4 @@ Name = "Impact"
 Animation = "default"
 Frames = SubResource( 1 )
 HitFrames = PoolIntArray( 4 )
-CustomScale = Vector2( 0.25, 0.25 )
+CustomScale = Vector2( -0.25, 0.25 )

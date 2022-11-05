@@ -2,6 +2,7 @@ using Godot;
 using Rpg2d.Battle;
 using Rpg2d.Battle.Actions;
 using Rpg2d.Battle.Actors;
+using Rpg2d.Godot.Skills;
 using System;
 using System.Threading.Tasks;
 
@@ -22,12 +23,16 @@ namespace Rpg2d.Godot.Battle.Actors
         public Action Died { get; set; }
         protected TaskCompletionSource<BattleAction> _actionTaskCompletionSource;
         public IActionDispatcher ActionDispatcher { get; set; }
+        public bool FlipSkillAnimation { get; protected set; }
+
         protected HitCounter _hitCounter = new HitCounter(Constants.HitMillisecondsTolerance);
+        protected Node _skillAnimationRoot;
 
         public override void _Ready()
         {
             _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
             _selectedAction.Owner = this;
+            _skillAnimationRoot = GetNode<Node>("SkillAnimationRoot");
         }
 
         public abstract void PerformAction(BattleAction action);
@@ -49,6 +54,15 @@ namespace Rpg2d.Godot.Battle.Actors
             int hits = _hitCounter.CountHit();
             float hitModifier = 1 + 0.2f * (hits - 1);
             Battler.DealDamage((int)(damage * hitModifier));
+        }
+
+        public void AddSkillAnimation(SkillAnimation animation, Action<int> frameChanged)
+        {
+            var animatedSkill = new SkillAnimatedSprite();
+            animatedSkill.FlipH = FlipSkillAnimation;
+            animatedSkill.FrameChanged = frameChanged;
+            _skillAnimationRoot.AddChild(animatedSkill);
+            animatedSkill.Play(animation);
         }
     }
 }

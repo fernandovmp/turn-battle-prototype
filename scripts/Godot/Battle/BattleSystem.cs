@@ -170,15 +170,6 @@ namespace Rpg2d.Godot.Battle
                 else
                 {
                     action.Owner.PerformAction(action);
-                    foreach (var target in action.TargetGroup.GetTargets())
-                    {
-                        action.Skill.Cast(new CastContext
-                        {
-                            Caster = action.Owner,
-                            Skill = action.Skill,
-                            Target = target
-                        });
-                    }
                 }
             }
         }

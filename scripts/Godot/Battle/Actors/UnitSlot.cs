@@ -16,14 +16,11 @@ namespace Rpg2d.Godot.Battle.Actors
         public override IBattler Battler => _unit;
         private TargetSelector _targetSelector;
         private SkillCaster _skillCaster;
-        private AnimatedSprite _skillAnimatedSprite;
 
         public override void _Ready()
         {
             base._Ready();
             _targetSelector = GetNode<TargetSelector>("/root/Root/TargetSelector");
-            _skillAnimatedSprite = GetNode<AnimatedSprite>("SkillAnimatedSprite");
-            _skillAnimatedSprite.Visible = false;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -41,36 +38,18 @@ namespace Rpg2d.Godot.Battle.Actors
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
             if (action.TargetGroup is null)
             {
-
+                var targetSlot = _targetSelector.GetSelected() as BaseSlot;
                 _skillCaster = new SkillCaster(new CastContext
                 {
                     Caster = this,
                     Skill = action.Skill,
-                    Target = _targetSelector.GetSelected()
+                    Target = targetSlot
                 });
-                _skillAnimatedSprite.Connect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
-                _skillAnimatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetSkillAnimation));
-                _skillAnimatedSprite.Frames = action.Skill.Animation.Frames;
-                _skillAnimatedSprite.Scale = action.Skill.Animation.CustomScale;
-                _skillAnimatedSprite.Play(action.Skill.Animation.Animation);
-                _skillAnimatedSprite.Visible = true;
+                targetSlot.AddSkillAnimation(action.Skill.Animation, _skillCaster.OnFrame);
             }
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
             _animatedSprite.Play(action.Skill.ActionAnimation);
             ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);
-        }
-
-        private void ResetSkillAnimation()
-        {
-            _skillAnimatedSprite.Disconnect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
-            _skillAnimatedSprite.Disconnect(Constants.AnimationFinishedSignal, this, nameof(ResetSkillAnimation));
-            _skillAnimatedSprite.Frames = new SpriteFrames();
-            _skillAnimatedSprite.Visible = false;
-        }
-
-        private void OnFrame()
-        {
-            _skillCaster.OnFrame(_skillAnimatedSprite.Frame);
         }
 
         private void ResetAnimation()
@@ -92,6 +71,7 @@ namespace Rpg2d.Godot.Battle.Actors
             _unit.DamageRecived += OnDamageRecived;
             _unit.Died += OnDied;
             HasUnit = true;
+            FlipSkillAnimation = true;
         }
     }
 }

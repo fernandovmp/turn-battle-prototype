@@ -4,37 +4,30 @@
 [ext_resource path="res://sprites/unit01.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=9]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 1536, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 192, 1536, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 384, 1536, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 576, 1536, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=13]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 768, 1536, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=14]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 960, 1536, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=15]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 1536, 192, 192 )
 
@@ -60,3 +53,5 @@ scale = Vector2( 2, 2 )
 frames = SubResource( 16 )
 animation = "attack"
 flip_h = true
+
+[node name="SkillAnimationRoot" type="Node2D" parent="."]

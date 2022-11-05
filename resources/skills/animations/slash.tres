@@ -20,4 +20,4 @@ Name = "Slash"
 Animation = "default"
 Frames = SubResource( 1 )
 HitFrames = PoolIntArray( 3 )
-CustomScale = Vector2( 0.25, 0.25 )
+CustomScale = Vector2( -0.25, 0.25 )

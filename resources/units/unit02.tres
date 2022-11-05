@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=15 format=2]
 
-[ext_resource path="res://resources/skills/attack.tres" type="Resource" id=1]
+[ext_resource path="res://resources/skills/spear_attack.tres" type="Resource" id=1]
 [ext_resource path="res://sprites/unit02.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitResource.cs" type="Script" id=3]
 

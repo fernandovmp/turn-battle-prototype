@@ -68,56 +68,48 @@ script = ExtResource( 11 )
 [node name="Party" type="Node" parent="."]
 
 [node name="LeftUnit" type="Node2D" parent="Party"]
+position = Vector2( 611, 246 )
 script = ExtResource( 1 )
 _actionMap = "battle_left_unit_action"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Party/LeftUnit"]
-position = Vector2( 611, 246 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 17 )
 
-[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/LeftUnit"]
-position = Vector2( 100, 200 )
-scale = Vector2( 0.25, 0.25 )
+[node name="SkillAnimationRoot" type="Node2D" parent="Party/LeftUnit"]
 
 [node name="RightUnit" type="Node2D" parent="Party"]
+position = Vector2( 921, 246 )
 script = ExtResource( 1 )
 _actionMap = "battle_right_unit_action"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Party/RightUnit"]
-position = Vector2( 921, 246 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
 
-[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/RightUnit"]
-position = Vector2( 100, 200 )
-scale = Vector2( 0.25, 0.25 )
+[node name="SkillAnimationRoot" type="Node2D" parent="Party/RightUnit"]
 
 [node name="BottomUnit" type="Node2D" parent="Party"]
+position = Vector2( 766, 342 )
 script = ExtResource( 1 )
 _actionMap = "battle_bottom_unit_action"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Party/BottomUnit"]
-position = Vector2( 766, 342 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 20 )
 
-[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/BottomUnit"]
-position = Vector2( 100, 200 )
-scale = Vector2( 0.25, 0.25 )
+[node name="SkillAnimationRoot" type="Node2D" parent="Party/BottomUnit"]
 
 [node name="UpUnit" type="Node2D" parent="Party"]
+position = Vector2( 766, 142 )
 script = ExtResource( 1 )
 _actionMap = "battle_up_unit_action"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Party/UpUnit"]
-position = Vector2( 766, 142 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 21 )
 
-[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/UpUnit"]
-position = Vector2( 100, 200 )
-scale = Vector2( 0.25, 0.25 )
+[node name="SkillAnimationRoot" type="Node2D" parent="Party/UpUnit"]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 265, 269 )

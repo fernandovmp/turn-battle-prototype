@@ -1,5 +1,7 @@
 using Rpg2d.Battle.Actions;
 using Rpg2d.Battle.Actors;
+using Rpg2d.Godot.Skills;
+using Rpg2d.Skills;
 using System.Threading.Tasks;
 
 namespace Rpg2d.Godot.Battle.Actors
@@ -19,6 +21,7 @@ namespace Rpg2d.Godot.Battle.Actors
             _enemy.DamageRecived += OnDamageRecived;
             _enemy.Died += OnDied;
             _hitCounter.Init();
+            FlipSkillAnimation = false;
         }
 
         public override void PerformAction(BattleAction action)
@@ -27,6 +30,17 @@ namespace Rpg2d.Godot.Battle.Actors
             IsActing = true;
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
             ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);
+            foreach (var target in action.TargetGroup.GetTargets())
+            {
+                var targetSlot = target as BaseSlot;
+                var skillCaster = new SkillCaster(new CastContext
+                {
+                    Caster = action.Owner,
+                    Skill = action.Skill,
+                    Target = target
+                });
+                targetSlot.AddSkillAnimation(action.Skill.Animation, skillCaster.OnFrame);
+            }
             _animatedSprite.Play(action.Skill.ActionAnimation);
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
         }
