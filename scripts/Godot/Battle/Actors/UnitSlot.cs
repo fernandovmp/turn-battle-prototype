@@ -1,6 +1,7 @@
 using Godot;
 using Rpg2d.Battle.Actions;
 using Rpg2d.Battle.Actors;
+using Rpg2d.Godot.Skills;
 using Rpg2d.Skills;
 using System;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Rpg2d.Godot.Battle.Actors
         private BattleUnit _unit;
         public override IBattler Battler => _unit;
         private TargetSelector _targetSelector;
+        private SkillCaster _skillCaster;
 
         public override void _Ready()
         {
@@ -34,24 +36,32 @@ namespace Rpg2d.Godot.Battle.Actors
             ActionEnabled = false;
             IsActing = true;
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
-            _animatedSprite.Play(action.Skill.ActionAnimation);
             if (action.TargetGroup is null)
             {
-                action.Skill.Cast(new CastContext
+
+                _skillCaster = new SkillCaster(new CastContext
                 {
                     Caster = this,
                     Skill = action.Skill,
                     Target = _targetSelector.GetSelected()
                 });
+                _animatedSprite.Connect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
             }
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
+            _animatedSprite.Play(action.Skill.ActionAnimation);
             ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);
+        }
+
+        private void OnFrame()
+        {
+            _skillCaster.OnFrame(_animatedSprite.Frame);
         }
 
         private void ResetAnimation()
         {
-            _animatedSprite.Disconnect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
             IsActing = false;
+            _animatedSprite.Disconnect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
+            _animatedSprite.Disconnect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
             ActionFinished?.Invoke(_selectedAction);
             _actionTaskCompletionSource.SetResult(_selectedAction);
             _selectedAction.Reset(_unit.AttackSkill);

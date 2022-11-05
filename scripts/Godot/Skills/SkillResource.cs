@@ -15,6 +15,8 @@ namespace Rpg2d.Godot.Skills
         public string ActionAnimation { get; set; } = "attack";
         [Export]
         public TargetTypeEnum TargetType { get; set; }
+        [Export]
+        public int[] HitFrames { get; set; }
 
         public Skill AsSkill() => new Skill
         {
@@ -22,6 +24,7 @@ namespace Rpg2d.Godot.Skills
             Damage = Damage,
             IdleAnimation = IdleAnimation,
             ActionAnimation = ActionAnimation,
+            HitFrames = HitFrames
         };
     }
 }

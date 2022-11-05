@@ -34,7 +34,7 @@ region = Rect2( 0, 576, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 5 ) ],
 "loop": true,
 "name": "attack",
 "speed": 10.0
