@@ -9,7 +9,7 @@ namespace Rpg2d.Godot.Skills
         public SkillCaster(CastContext context)
         {
             Context = context;
-            HitFrames = context.Skill.HitFrames.ToList().AsEnumerable<int>().GetEnumerator();
+            HitFrames = context.Skill.Animation.HitFrames.ToList().AsEnumerable<int>().GetEnumerator();
             HasFrames = HitFrames.MoveNext();
         }
 

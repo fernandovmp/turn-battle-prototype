@@ -16,11 +16,14 @@ namespace Rpg2d.Godot.Battle.Actors
         public override IBattler Battler => _unit;
         private TargetSelector _targetSelector;
         private SkillCaster _skillCaster;
+        private AnimatedSprite _skillAnimatedSprite;
 
         public override void _Ready()
         {
             base._Ready();
             _targetSelector = GetNode<TargetSelector>("/root/Root/TargetSelector");
+            _skillAnimatedSprite = GetNode<AnimatedSprite>("SkillAnimatedSprite");
+            _skillAnimatedSprite.Visible = false;
         }
 
         public override void _Input(InputEvent inputEvent)
@@ -45,23 +48,35 @@ namespace Rpg2d.Godot.Battle.Actors
                     Skill = action.Skill,
                     Target = _targetSelector.GetSelected()
                 });
-                _animatedSprite.Connect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
+                _skillAnimatedSprite.Connect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
+                _skillAnimatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetSkillAnimation));
+                _skillAnimatedSprite.Frames = action.Skill.Animation.Frames;
+                _skillAnimatedSprite.Scale = action.Skill.Animation.CustomScale;
+                _skillAnimatedSprite.Play(action.Skill.Animation.Animation);
+                _skillAnimatedSprite.Visible = true;
             }
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
             _animatedSprite.Play(action.Skill.ActionAnimation);
             ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);
         }
 
+        private void ResetSkillAnimation()
+        {
+            _skillAnimatedSprite.Disconnect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
+            _skillAnimatedSprite.Disconnect(Constants.AnimationFinishedSignal, this, nameof(ResetSkillAnimation));
+            _skillAnimatedSprite.Frames = new SpriteFrames();
+            _skillAnimatedSprite.Visible = false;
+        }
+
         private void OnFrame()
         {
-            _skillCaster.OnFrame(_animatedSprite.Frame);
+            _skillCaster.OnFrame(_skillAnimatedSprite.Frame);
         }
 
         private void ResetAnimation()
         {
             IsActing = false;
             _animatedSprite.Disconnect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
-            _animatedSprite.Disconnect(Constants.AnimationFrameEnd, this, nameof(OnFrame));
             ActionFinished?.Invoke(_selectedAction);
             _actionTaskCompletionSource.SetResult(_selectedAction);
             _selectedAction.Reset(_unit.AttackSkill);

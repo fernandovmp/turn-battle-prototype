@@ -76,6 +76,10 @@ position = Vector2( 611, 246 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 17 )
 
+[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/LeftUnit"]
+position = Vector2( 100, 200 )
+scale = Vector2( 0.25, 0.25 )
+
 [node name="RightUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
 _actionMap = "battle_right_unit_action"
@@ -84,6 +88,10 @@ _actionMap = "battle_right_unit_action"
 position = Vector2( 921, 246 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
+
+[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/RightUnit"]
+position = Vector2( 100, 200 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="BottomUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
@@ -94,6 +102,10 @@ position = Vector2( 766, 342 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 20 )
 
+[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/BottomUnit"]
+position = Vector2( 100, 200 )
+scale = Vector2( 0.25, 0.25 )
+
 [node name="UpUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
 _actionMap = "battle_up_unit_action"
@@ -102,6 +114,10 @@ _actionMap = "battle_up_unit_action"
 position = Vector2( 766, 142 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 21 )
+
+[node name="SkillAnimatedSprite" type="AnimatedSprite" parent="Party/UpUnit"]
+position = Vector2( 100, 200 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 265, 269 )

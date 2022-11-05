@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://scripts/Godot/Skills/SkillAnimationResource.cs" type="Script" id=1]
+[ext_resource path="res://sprites/animations/A200-1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/animations/A200-4.png" type="Texture" id=3]
+[ext_resource path="res://sprites/animations/A200-2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/animations/A200-3.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ null, null, null, null, ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[resource]
+script = ExtResource( 1 )
+Name = "Impact"
+Animation = "default"
+Frames = SubResource( 1 )
+HitFrames = PoolIntArray( 4 )
+CustomScale = Vector2( 0.25, 0.25 )
