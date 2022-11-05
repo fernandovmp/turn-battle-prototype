@@ -108,13 +108,11 @@ namespace Rpg2d.Battle
         {
             if (EnumerateUnits().All(unit => unit.IsDead))
             {
-                Phase = BattlePhaseEnum.EnemyVictory;
-                TargetSelector.Enabled = false;
+                EndBattle(BattlePhaseEnum.EnemyVictory);
             }
             else if (_enemies.All(unit => unit.IsDead))
             {
-                Phase = BattlePhaseEnum.PartyVictory;
-                TargetSelector.Enabled = false;
+                EndBattle(BattlePhaseEnum.PartyVictory);
             }
             if (Phase == BattlePhaseEnum.PartyTurn || Phase == BattlePhaseEnum.EnemyTurn)
             {
@@ -135,6 +133,16 @@ namespace Rpg2d.Battle
                     callback();
                 }
             }
+        }
+
+        private void EndBattle(BattlePhaseEnum phase)
+        {
+            foreach (var unit in EnumerateUnits())
+            {
+                unit.ActionEnabled = false;
+            }
+            TargetSelector.Enabled = false;
+            Phase = phase;
         }
 
         private async void StartEnemyTurn()
