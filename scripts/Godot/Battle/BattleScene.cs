@@ -11,7 +11,7 @@ namespace Rpg2d.Godot.Battle
             var battleUiController = GetNode<BattleUiController>("CanvasLayer");
             var battleSystem = GetNode<BattleSystem>("BattleSystem");
             var repository = new MemoryCacheRepository();
-            var context = repository.GetValue<BattleSystemContext>("battle_context");
+            var context = repository.GetValue<BattleSystemContext>(Constants.BattleContextKey);
             battleUiController.SetBattleSystem(battleSystem);
             battleSystem.Init(context);
         }

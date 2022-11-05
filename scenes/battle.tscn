@@ -67,7 +67,7 @@ script = ExtResource( 11 )
 
 [node name="Party" type="Node" parent="."]
 
-[node name="LeftUnit" type="Node" parent="Party"]
+[node name="LeftUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
 _actionMap = "battle_left_unit_action"
 
@@ -76,7 +76,7 @@ position = Vector2( 611, 246 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 17 )
 
-[node name="RightUnit" type="Node" parent="Party"]
+[node name="RightUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
 _actionMap = "battle_right_unit_action"
 
@@ -85,7 +85,7 @@ position = Vector2( 921, 246 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
 
-[node name="BottomUnit" type="Node" parent="Party"]
+[node name="BottomUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
 _actionMap = "battle_bottom_unit_action"
 
@@ -94,7 +94,7 @@ position = Vector2( 766, 342 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 20 )
 
-[node name="UpUnit" type="Node" parent="Party"]
+[node name="UpUnit" type="Node2D" parent="Party"]
 script = ExtResource( 1 )
 _actionMap = "battle_up_unit_action"
 

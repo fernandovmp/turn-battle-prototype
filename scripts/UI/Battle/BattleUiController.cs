@@ -48,7 +48,7 @@ namespace Rpg2d.UI.Battle
 
         private void ShowResult(string title)
         {
-            GetNode<Control>("BattleUI").Visible = false;
+            _battleUi.Visible = false;
             _resultUi.ShowResult(title);
         }
     }

@@ -14,10 +14,20 @@ namespace Rpg2d.UI.Battle
         private Control _damageTextRoot;
         private Dictionary<IBattlerSlot, HitLabel> _hitLabelDictionary = new Dictionary<IBattlerSlot, HitLabel>();
         private BattleSystem _battleSystem;
+        private DynamicFontData _fontData;
 
         public void Init(BattleSystem battleSystem)
         {
             _battleSystem = battleSystem;
+            if (_damageTextRoot == null)
+            {
+                _damageTextRoot = GetNode<Control>("DamageTextContainer");
+            }
+            if (_targetHudRoot == null)
+            {
+                _targetHudRoot = GetNode<Control>("TargetHudContainer");
+            }
+            _fontData = ResourceLoader.Load<DynamicFontData>("res://fonts/Roboto-Regular.ttf");
             InitUnitHuds(_battleSystem.EnumerateUnits());
             _battleSystem.TargetSelector.SelectedTargetChanged += UpdateTargetHud;
             _battleSystem.TargetSelector.EnableChanged += ShowTargetHud;
@@ -44,10 +54,6 @@ namespace Rpg2d.UI.Battle
 
         public void DisplayDamageText(SlotDamageRecivedArgs args)
         {
-            if (_damageTextRoot == null)
-            {
-                _damageTextRoot = GetNode<Control>("DamageTextContainer");
-            }
             Vector2 position;
             if (args.Slot is EnemySlot enemySlot)
             {
@@ -67,7 +73,7 @@ namespace Rpg2d.UI.Battle
             damageLabel.Text = args.Damage.ToString();
             damageLabel.SetStartPosition(position);
             var font = new DynamicFont();
-            font.FontData = ResourceLoader.Load<DynamicFontData>("res://fonts/Roboto-Regular.ttf");
+            font.FontData = _fontData;
             font.Size = 26;
             damageLabel.AddFontOverride("font", font);
             _damageTextRoot.AddChild(damageLabel);
@@ -85,7 +91,7 @@ namespace Rpg2d.UI.Battle
             {
                 hitLabel = new HitLabel();
                 var font = new DynamicFont();
-                font.FontData = ResourceLoader.Load<DynamicFontData>("res://fonts/Roboto-Regular.ttf");
+                font.FontData = _fontData;
                 font.Size = 26;
                 hitLabel.AddFontOverride("font", font);
                 hitLabel.RectGlobalPosition = position + new Vector2(0, -50);
@@ -97,10 +103,6 @@ namespace Rpg2d.UI.Battle
 
         public void UpdateTargetHud(IBattlerSlot target)
         {
-            if (_targetHudRoot == null)
-            {
-                _targetHudRoot = GetNode<Control>("TargetHudContainer");
-            }
             var hud = _targetHudRoot.GetNodeOrNull<UnitHud>("TargetHud");
             if (hud == null)
             {
@@ -116,10 +118,6 @@ namespace Rpg2d.UI.Battle
 
         public void ShowTargetHud(bool show)
         {
-            if (_targetHudRoot == null)
-            {
-                _targetHudRoot = GetNode<Control>("TargetHudContainer");
-            }
             _targetHudRoot.Visible = show;
         }
     }

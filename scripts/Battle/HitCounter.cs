@@ -7,8 +7,16 @@ namespace Rpg2d.Battle
     {
         private long _lastHit = 0;
         private int _count = 0;
-        private Stopwatch _stopwatch = new Stopwatch();
+        private readonly Stopwatch _stopwatch = new Stopwatch();
+        private readonly int _millisecondsTolerance;
+
+        public HitCounter(int millisecondsTolerance)
+        {
+            _millisecondsTolerance = millisecondsTolerance;
+        }
+
         public int Hits => _count;
+
         public void Init()
         {
             _stopwatch.Restart();
@@ -17,7 +25,7 @@ namespace Rpg2d.Battle
         public int CountHit()
         {
             long currentTime = _stopwatch.ElapsedMilliseconds;
-            if (currentTime < 1500 || _count == 0)
+            if (currentTime < _millisecondsTolerance || _count == 0)
             {
                 _count++;
             }

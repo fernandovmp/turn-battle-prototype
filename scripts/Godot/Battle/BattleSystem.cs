@@ -104,10 +104,6 @@ namespace Rpg2d.Godot.Battle
             Phase = BattlePhaseEnum.PartyTurn;
         }
 
-        public override void _Input(InputEvent inputEvent)
-        {
-        }
-
         public void AllActionFinished()
         {
             if (EnumerateUnits().All(unit => unit.IsDead))

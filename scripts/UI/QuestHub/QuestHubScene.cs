@@ -56,7 +56,7 @@ namespace Rpg2d.UI.QuestHub
         private void StartQuest(QuestResource quest)
         {
             var repository = new MemoryCacheRepository();
-            repository.SetValue("battle_context", new BattleSystemContext
+            repository.SetValue(Rpg2d.Godot.Battle.Constants.BattleContextKey, new BattleSystemContext
             {
                 PartyLeftUnit = _partyLeftUnit,
                 PartyUpUnit = _partyUpUnit,
