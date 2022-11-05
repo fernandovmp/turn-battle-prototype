@@ -1,8 +1,7 @@
-using Godot;
+using Rpg2d.Battle.Actors;
 using Rpg2d.Skills;
-using System;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Battle.Actions
 {
     public class BattleAction
     {

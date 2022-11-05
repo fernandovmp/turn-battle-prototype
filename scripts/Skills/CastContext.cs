@@ -1,6 +1,4 @@
-using Godot;
-using Rpg2d.Battle;
-using System;
+using Rpg2d.Battle.Actors;
 
 namespace Rpg2d.Skills
 {

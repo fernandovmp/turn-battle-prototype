@@ -1,4 +1,4 @@
-namespace Rpg2d.Battle
+namespace Rpg2d.Battle.Actors
 {
     public class BattlerDamageRecivedArgs
     {

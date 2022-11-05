@@ -1,8 +1,11 @@
 using Godot;
+using Rpg2d.Battle;
+using Rpg2d.Battle.Actions;
+using Rpg2d.Battle.Actors;
 using System;
 using System.Threading.Tasks;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle.Actors
 {
     public class EnemySlot : Node2D, IBattlerSlot
     {

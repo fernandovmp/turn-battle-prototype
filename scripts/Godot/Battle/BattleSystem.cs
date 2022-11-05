@@ -1,10 +1,14 @@
 using Godot;
-using Rpg2d.UI.Battle;
+using Rpg2d.Battle;
+using Rpg2d.Battle.Actions;
+using Rpg2d.Battle.Actors;
+using Rpg2d.Godot.Battle.Actors;
+using Rpg2d.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle
 {
     public class BattleSystem : Node
     {
@@ -155,7 +159,7 @@ namespace Rpg2d.Battle
                 enemy.ActionEnabled = true;
             }
             var ai = _troop.AI;
-            var actions = ai.GetActions(new BattleContext
+            var actions = ai.GetActions(new ActionContext
             {
                 Enemies = _enemies,
                 Party = EnumerateUnits()
@@ -172,7 +176,7 @@ namespace Rpg2d.Battle
                     action.Owner.PerformAction(action);
                     foreach (var target in action.TargetGroup.GetTargets())
                     {
-                        action.Skill.Cast(new Skills.CastContext
+                        action.Skill.Cast(new CastContext
                         {
                             Caster = action.Owner,
                             Skill = action.Skill,

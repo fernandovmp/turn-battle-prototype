@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://resources/skills/attack.tres" type="Resource" id=1]
-[ext_resource path="res://scripts/Battle/UnitResource.cs" type="Script" id=2]
+[ext_resource path="res://scripts/Godot/Battle/Actors/UnitResource.cs" type="Script" id=2]
 [ext_resource path="res://sprites/unit03.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]

@@ -1,8 +1,4 @@
-using Godot;
-using Rpg2d.Skills;
-using System;
-
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle.Actors
 {
     public class BattleEnemy : BaseBattler
     {
@@ -13,7 +9,7 @@ namespace Rpg2d.Battle
             Hp = unit.MaxHp;
             Attack = unit.Attack;
             AnimationFrames = unit.AnimationFrames;
-            AttackSkill = new Skill(unit.AttackSkill);
+            AttackSkill = unit.AttackSkill.AsSkill();
         }
     }
 }

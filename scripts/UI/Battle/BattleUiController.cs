@@ -1,5 +1,6 @@
 using Godot;
 using Rpg2d.Battle;
+using Rpg2d.Godot.Battle;
 
 namespace Rpg2d.UI.Battle
 {

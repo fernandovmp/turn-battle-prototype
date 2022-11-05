@@ -1,11 +1,9 @@
-using Godot;
-using Rpg2d.UI.Battle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Battle.Actions
 {
     public class ActionDispatcher : IActionDispatcher
     {

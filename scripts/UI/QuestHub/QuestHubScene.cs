@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Godot;
-using Rpg2d.Battle;
-using Rpg2d.Quests;
+using Rpg2d.Godot.Battle;
+using Rpg2d.Godot.Battle.Actors;
+using Rpg2d.Godot.Quests;
 using Rpg2d.Services;
 
 namespace Rpg2d.UI.QuestHub

@@ -1,6 +1,6 @@
 using System;
 using Godot;
-using Rpg2d.Quests;
+using Rpg2d.Godot.Quests;
 
 namespace Rpg2d.UI.QuestHub
 {

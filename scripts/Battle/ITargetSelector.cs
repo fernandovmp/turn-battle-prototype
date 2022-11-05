@@ -1,4 +1,5 @@
 using System;
+using Rpg2d.Battle.Actors;
 
 namespace Rpg2d.Battle
 {

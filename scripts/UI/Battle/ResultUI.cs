@@ -1,7 +1,4 @@
 using Godot;
-using Rpg2d.Battle;
-using System;
-using System.Collections.Generic;
 
 namespace Rpg2d.UI.Battle
 {

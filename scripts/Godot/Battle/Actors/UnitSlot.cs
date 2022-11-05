@@ -1,8 +1,11 @@
 using Godot;
+using Rpg2d.Battle.Actions;
+using Rpg2d.Battle.Actors;
+using Rpg2d.Skills;
 using System;
 using System.Threading.Tasks;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle.Actors
 {
     public class UnitSlot : Node, IBattlerSlot
     {
@@ -50,7 +53,7 @@ namespace Rpg2d.Battle
             _animatedSprite.Play(action.Skill.ActionAnimation);
             if (action.TargetGroup is null)
             {
-                action.Skill.Cast(new Skills.CastContext
+                action.Skill.Cast(new CastContext
                 {
                     Caster = this,
                     Skill = action.Skill,

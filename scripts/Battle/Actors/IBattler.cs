@@ -1,6 +1,6 @@
 using System;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Battle.Actors
 {
     public interface IBattler
     {

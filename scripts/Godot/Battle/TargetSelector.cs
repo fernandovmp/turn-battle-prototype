@@ -1,9 +1,11 @@
 using Godot;
-using Rpg2d.UI.Battle;
+using Rpg2d.Battle;
+using Rpg2d.Battle.Actors;
+using Rpg2d.Godot.Battle.Actors;
 using System;
 using System.Collections.Generic;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle
 {
     public class TargetSelector : Node2D, ITargetSelector
     {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Rpg2d.Battle;
+using Rpg2d.Battle.Actors;
 
 namespace Rpg2d.Skills
 {

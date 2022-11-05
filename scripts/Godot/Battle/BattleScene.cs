@@ -2,7 +2,7 @@ using Godot;
 using Rpg2d.Services;
 using Rpg2d.UI.Battle;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle
 {
     public class BattleScene : Node
     {

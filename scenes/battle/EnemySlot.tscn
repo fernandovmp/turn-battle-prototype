@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scripts/Battle/EnemySlot.cs" type="Script" id=1]
+[ext_resource path="res://scripts/Godot/Battle/Actors/EnemySlot.cs" type="Script" id=1]
 [ext_resource path="res://sprites/unit01.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=9]

@@ -1,8 +1,7 @@
 using Godot;
-using Rpg2d.Skills;
-using System;
+using Rpg2d.Godot.Skills;
 
-namespace Rpg2d.Battle
+namespace Rpg2d.Godot.Battle.Actors
 {
     public class UnitResource : Resource
     {
