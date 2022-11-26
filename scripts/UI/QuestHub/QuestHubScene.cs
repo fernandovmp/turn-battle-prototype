@@ -64,6 +64,7 @@ namespace Rpg2d.UI.QuestHub
                 PartyBottomUnit = _partyBottomUnit,
                 Troop = quest.Troop
             });
+            repository.SetValue(Rpg2d.Godot.Battle.Constants.BattleBackgroundKey, quest.Background);
             GetTree().ChangeScene("res://scenes/battle.tscn");
         }
     }

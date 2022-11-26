@@ -1,9 +1,11 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://resources/troops/troop02.tres" type="Resource" id=1]
 [ext_resource path="res://scripts/Godot/Quests/QuestResource.cs" type="Script" id=2]
+[ext_resource path="res://sprites/backgrounds/Battleground1.png" type="Texture" id=3]
 
 [resource]
 script = ExtResource( 2 )
 Name = "Quest02"
 Troop = ExtResource( 1 )
+Background = ExtResource( 3 )
