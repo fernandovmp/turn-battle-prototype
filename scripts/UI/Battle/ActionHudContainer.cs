@@ -2,6 +2,7 @@ using System;
 using Godot;
 using Rpg2d.Battle.Actors;
 using Rpg2d.Godot.Battle.Actors;
+using Rpg2d.Godot.Resources;
 
 namespace Rpg2d.UI.Battle
 {
@@ -86,6 +87,15 @@ namespace Rpg2d.UI.Battle
             _unit = unit;
             _unit.Died += OnUnitDied;
             _actionLabel.Text = _unit.SelectedAction.Skill.Name;
+            var gamepad = ResourceLoader.Load<GamepadMapResource>("res://resources//gamepad/XboxGamepad.tres");
+            foreach(var inputEvent in InputMap.GetActionList(_unit.ActionMap))
+            {
+                if(inputEvent is InputEventJoypadButton joypadButton)
+                {
+                    _actionButton.Texture = gamepad.GetActionButtonTexture(joypadButton.ButtonIndex);
+                    break;
+                }
+            }
         }
 
         private void OnUnitDied()
