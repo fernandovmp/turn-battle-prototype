@@ -72,11 +72,9 @@ namespace Rpg2d.Godot.Battle
             _troop = troop;
             for (int i = 0; i < troop.Enemies.Length; i++)
             {
-                var enemyNode = _enemyModel.Instance();
-                _enemiesRoot.AddChild(enemyNode);
-                var node2D = enemyNode.GetNode<Node2D>("AnimatedSprite");
-                var enemySlot = enemyNode.GetNode<EnemySlot>(".");
-                node2D.Position = troop.Positions[i];
+                var enemySlot = _enemyModel.Instance<EnemySlot>();
+                _enemiesRoot.AddChild(enemySlot);
+                enemySlot.Position = troop.Positions[i];
                 enemySlot.SetEnemy(troop.Enemies[i]);
                 enemySlot.ActionDispatcher = _actionDispatcher;
                 enemySlot.Died += _targetSelector.Next;
