@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitSlot.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -11,8 +11,9 @@
 [ext_resource path="res://scripts/UI/Battle/BattleUi.cs" type="Script" id=9]
 [ext_resource path="res://scenes/battle/UnitHud.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/Godot/Battle/BattleScene.cs" type="Script" id=11]
-[ext_resource path="res://scenes/battle/ActionHud.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sprites/backgrounds/Battleground1.png" type="Texture" id=12]
 [ext_resource path="res://scripts/UI/Battle/ActionHudGroup.cs" type="Script" id=13]
+[ext_resource path="res://scenes/battle/ActionHud.tscn" type="PackedScene" id=14]
 
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
@@ -71,11 +72,13 @@ script = ExtResource( 11 )
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 508, 291 )
 scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 12 )
 
-[node name="Party" type="Node" parent="."]
+[node name="Party" type="Node2D" parent="."]
+position = Vector2( 700, 360 )
 
 [node name="LeftUnit" type="Node2D" parent="Party"]
-position = Vector2( 611, 246 )
+position = Vector2( -150, 0 )
 script = ExtResource( 1 )
 _actionMap = "battle_left_unit_action"
 
@@ -86,7 +89,7 @@ frames = SubResource( 17 )
 [node name="SkillAnimationRoot" type="Node2D" parent="Party/LeftUnit"]
 
 [node name="RightUnit" type="Node2D" parent="Party"]
-position = Vector2( 921, 246 )
+position = Vector2( 150, 0 )
 script = ExtResource( 1 )
 _actionMap = "battle_right_unit_action"
 
@@ -97,7 +100,7 @@ frames = SubResource( 19 )
 [node name="SkillAnimationRoot" type="Node2D" parent="Party/RightUnit"]
 
 [node name="BottomUnit" type="Node2D" parent="Party"]
-position = Vector2( 766, 342 )
+position = Vector2( 0, 75 )
 script = ExtResource( 1 )
 _actionMap = "battle_bottom_unit_action"
 
@@ -108,7 +111,7 @@ frames = SubResource( 20 )
 [node name="SkillAnimationRoot" type="Node2D" parent="Party/BottomUnit"]
 
 [node name="UpUnit" type="Node2D" parent="Party"]
-position = Vector2( 766, 142 )
+position = Vector2( 0, -75 )
 script = ExtResource( 1 )
 _actionMap = "battle_up_unit_action"
 
@@ -136,7 +139,7 @@ margin_right = 1026.0
 margin_bottom = 602.0
 script = ExtResource( 9 )
 _unitHudModel = ExtResource( 10 )
-_actionHudModel = ExtResource( 12 )
+_actionHudModel = ExtResource( 14 )
 
 [node name="TargetHudContainer" type="Control" parent="CanvasLayer/BattleUI"]
 margin_left = 32.0
@@ -162,8 +165,9 @@ margin_bottom = 40.0
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -426.0
+margin_top = 120.0
 margin_right = -6.0
-margin_bottom = 135.0
+margin_bottom = 255.0
 script = ExtResource( 13 )
 HorizontalGap = 30.0
 

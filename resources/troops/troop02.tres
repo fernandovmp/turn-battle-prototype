@@ -8,5 +8,5 @@
 script = ExtResource( 1 )
 Name = "Troop02"
 Enemies = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
-Positions = PoolVector2Array( 0, 0, -30, -100, -30, 100 )
+Positions = PoolVector2Array( 0, 100, -30, 0, -30, 200 )
 AI = ExtResource( 3 )
