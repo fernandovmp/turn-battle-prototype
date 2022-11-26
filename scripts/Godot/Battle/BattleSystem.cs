@@ -178,9 +178,9 @@ namespace Rpg2d.Godot.Battle
 
         public IEnumerable<UnitSlot> EnumerateAllUnits()
         {
-            yield return _leftUnit;
             yield return _upUnit;
             yield return _rightUnit;
+            yield return _leftUnit;
             yield return _bottomUnit;
         }
     }

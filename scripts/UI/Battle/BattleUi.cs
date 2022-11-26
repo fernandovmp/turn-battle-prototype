@@ -10,6 +10,8 @@ namespace Rpg2d.UI.Battle
     {
         [Export]
         private PackedScene _unitHudModel;
+        [Export]
+        private PackedScene _actionHudModel;
         private Control _targetHudRoot;
         private Control _damageTextRoot;
         private Dictionary<IBattlerSlot, HitLabel> _hitLabelDictionary = new Dictionary<IBattlerSlot, HitLabel>();
@@ -41,6 +43,8 @@ namespace Rpg2d.UI.Battle
         public void InitUnitHuds(IEnumerable<UnitSlot> units)
         {
             var hudRoot = GetNode<Node>("UnitHudContainer");
+            var actionHudRoot = GetNode<Node>("ActionHudContainer");
+            int i = 0;
             foreach (var unit in units)
             {
                 var hudNode = _unitHudModel.Instance();
@@ -49,6 +53,12 @@ namespace Rpg2d.UI.Battle
                 hud.SetUnit(unit);
                 hudRoot.AddChild(hud);
                 unit.DamageRecived += DisplayDamageText;
+                var actionHud = _actionHudModel.Instance<ActionHudContainer>();
+                actionHud.Initialize();
+                actionHud.Direction = i % 2 == 0 ? ActionHudContainer.DirectionEnum.Left : ActionHudContainer.DirectionEnum.Right;
+                actionHud.SetUnit(unit);
+                actionHudRoot.AddChild(actionHud);
+                i++;
             }
         }
 

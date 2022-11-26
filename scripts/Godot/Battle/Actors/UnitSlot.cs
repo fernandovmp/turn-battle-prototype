@@ -16,6 +16,7 @@ namespace Rpg2d.Godot.Battle.Actors
         public override IBattler Battler => _unit;
         private TargetSelector _targetSelector;
         private SkillCaster _skillCaster;
+        public BattleAction SelectedAction => _selectedAction;
 
         public override void _Ready()
         {
