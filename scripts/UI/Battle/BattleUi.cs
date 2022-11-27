@@ -17,6 +17,7 @@ namespace Rpg2d.UI.Battle
         private Dictionary<IBattlerSlot, HitLabel> _hitLabelDictionary = new Dictionary<IBattlerSlot, HitLabel>();
         private BattleSystem _battleSystem;
         private DynamicFontData _fontData;
+        private DynamicFont _font;
 
         public void Init(BattleSystem battleSystem)
         {
@@ -30,6 +31,11 @@ namespace Rpg2d.UI.Battle
                 _targetHudRoot = GetNode<Control>("TargetHudContainer");
             }
             _fontData = ResourceLoader.Load<DynamicFontData>("res://fonts/Roboto-Regular.ttf");
+            _font = new DynamicFont();
+            _font.FontData = _fontData;
+            _font.Size = 26;
+            _font.OutlineSize = 2;
+            _font.OutlineColor = Colors.Black;
             InitUnitHuds(_battleSystem.EnumerateUnits());
             _battleSystem.TargetSelector.SelectedTargetChanged += UpdateTargetHud;
             _battleSystem.TargetSelector.EnableChanged += ShowTargetHud;
@@ -82,10 +88,7 @@ namespace Rpg2d.UI.Battle
             var damageLabel = new DamageLabel();
             damageLabel.Text = args.Damage.ToString();
             damageLabel.SetStartPosition(position);
-            var font = new DynamicFont();
-            font.FontData = _fontData;
-            font.Size = 26;
-            damageLabel.AddFontOverride("font", font);
+            damageLabel.AddFontOverride("font", _font);
             _damageTextRoot.AddChild(damageLabel);
             damageLabel.DestroyAfter(1f);
             if (args.HitCount > 1)
@@ -100,10 +103,7 @@ namespace Rpg2d.UI.Battle
             if (!hasValue)
             {
                 hitLabel = new HitLabel();
-                var font = new DynamicFont();
-                font.FontData = _fontData;
-                font.Size = 26;
-                hitLabel.AddFontOverride("font", font);
+                hitLabel.AddFontOverride("font", _font);
                 hitLabel.RectGlobalPosition = position + new Vector2(0, -50);
                 AddChild(hitLabel);
                 _hitLabelDictionary.Add(slot, hitLabel);
