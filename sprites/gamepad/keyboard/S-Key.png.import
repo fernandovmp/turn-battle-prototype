@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/S-Key.png-4e81cfb8a5d3f850ca7560049e10e914.image"
+
+[deps]
+
+source_file="res://sprites/gamepad/keyboard/S-Key.png"
+dest_files=[ "res://.import/S-Key.png-4e81cfb8a5d3f850ca7560049e10e914.image" ]
+
+[params]
+

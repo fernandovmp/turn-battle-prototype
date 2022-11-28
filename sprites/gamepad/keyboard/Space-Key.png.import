@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Space-Key.png-c313f9f7a97081a5afe2a8aa63f45b36.image"
+
+[deps]
+
+source_file="res://sprites/gamepad/keyboard/Space-Key.png"
+dest_files=[ "res://.import/Space-Key.png-c313f9f7a97081a5afe2a8aa63f45b36.image" ]
+
+[params]
+

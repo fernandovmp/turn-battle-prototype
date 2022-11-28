@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Button - PS Cross 1.png-24136403c4a881f4448f79b270029c3e.image"
+
+[deps]
+
+source_file="res://sprites/gamepad/ps/Button - PS Cross 1.png"
+dest_files=[ "res://.import/Button - PS Cross 1.png-24136403c4a881f4448f79b270029c3e.image" ]
+
+[params]
+

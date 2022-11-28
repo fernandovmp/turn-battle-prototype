@@ -12,7 +12,7 @@ namespace Rpg2d.UI.Battle
             Visible = true;
             InputEnabled = true;
             GetNode<Label>("TitleLabel").Text = title;
-            var gamepad = ResourceLoader.Load<GamepadMapResource>("res://resources//gamepad/XboxGamepad.tres");
+            var gamepad = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveGamepadMap();
             var continueLabel = GetNode<RichTextLabel>("ContinueLabel");
             continueLabel.BbcodeText = "";
             continueLabel.PushAlign(RichTextLabel.Align.Center);

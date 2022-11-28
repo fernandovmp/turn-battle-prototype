@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/D-Key.png-f0c3edd949b653a55dbd24a0dba732ce.image"
+
+[deps]
+
+source_file="res://sprites/gamepad/keyboard/D-Key.png"
+dest_files=[ "res://.import/D-Key.png-f0c3edd949b653a55dbd24a0dba732ce.image" ]
+
+[params]
+

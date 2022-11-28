@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/A-Key.png-6f570ee958f26236b2d64c281584da28.image"
+
+[deps]
+
+source_file="res://sprites/gamepad/keyboard/A-Key.png"
+dest_files=[ "res://.import/A-Key.png-6f570ee958f26236b2d64c281584da28.image" ]
+
+[params]
+
