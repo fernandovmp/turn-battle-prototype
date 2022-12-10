@@ -1,11 +1,13 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Godot/Quests/QuestResource.cs" type="Script" id=1]
 [ext_resource path="res://resources/troops/troop03.tres" type="Resource" id=2]
 [ext_resource path="res://sprites/backgrounds/Battleground4.png" type="Texture" id=3]
+[ext_resource path="res://audio/bgm/BGM07battle3.wav" type="AudioStream" id=4]
 
 [resource]
 script = ExtResource( 1 )
 Name = "Quest03"
 Troop = ExtResource( 2 )
 Background = ExtResource( 3 )
+BattleMusic = ExtResource( 4 )

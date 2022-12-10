@@ -11,10 +11,14 @@ namespace Rpg2d.Godot.Battle
             var battleUiController = GetNode<BattleUiController>("CanvasLayer");
             var battleSystem = GetNode<BattleSystem>("BattleSystem");
             var battleBackground = GetNode<Sprite>("Background");
+            var battleMusicPlayer = GetNode<AudioStreamPlayer>("AudioPlayer");
             var repository = new MemoryCacheRepository();
             var context = repository.GetValue<BattleSystemContext>(Constants.BattleContextKey);
             var backgroundTexture = repository.GetValue<Texture>(Constants.BattleBackgroundKey);
+            var battleMusic = repository.GetValue<AudioStream>(Constants.BattleMusicKey);
             battleBackground.Texture = backgroundTexture;
+            battleMusicPlayer.Stream = battleMusic;
+            battleMusicPlayer.Play(0);
             battleUiController.SetBattleSystem(battleSystem);
             battleSystem.Init(context);
         }

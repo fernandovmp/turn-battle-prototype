@@ -65,6 +65,7 @@ namespace Rpg2d.UI.QuestHub
                 Troop = quest.Troop
             });
             repository.SetValue(Rpg2d.Godot.Battle.Constants.BattleBackgroundKey, quest.Background);
+            repository.SetValue(Rpg2d.Godot.Battle.Constants.BattleMusicKey, quest.BattleMusic);
             GetTree().ChangeScene("res://scenes/battle.tscn");
         }
     }
