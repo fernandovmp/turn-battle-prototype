@@ -12,13 +12,19 @@ namespace Rpg2d.UI.Battle
             Visible = true;
             InputEnabled = true;
             GetNode<Label>("TitleLabel").Text = title;
-            var gamepad = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveGamepadMap();
+            var inputDeviceMap = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveDeviceMap();
             var continueLabel = GetNode<RichTextLabel>("ContinueLabel");
             continueLabel.BbcodeText = "";
             continueLabel.PushAlign(RichTextLabel.Align.Center);
             continueLabel.AddText("Press ");
-            continueLabel.AddImage(gamepad.BottomDigitalButton, width: 24, height: 24);
+            Texture texture = inputDeviceMap.GetTextureForAction("ui_accept");
+            continueLabel.AddImage(texture, width: ToProportionaly(texture.GetWidth(), texture.GetHeight(), 24), height: 24);
             continueLabel.AddText(" to continue");
+        }
+
+        private int ToProportionaly(int size, int originalRef, int reference)
+        {
+            return size / (originalRef / reference);
         }
 
         public override void _Input(InputEvent @event)

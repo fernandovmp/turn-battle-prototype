@@ -87,15 +87,8 @@ namespace Rpg2d.UI.Battle
             _unit = unit;
             _unit.Died += OnUnitDied;
             _actionLabel.Text = _unit.SelectedAction.Skill.Name;
-            var gamepad = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveGamepadMap();
-            foreach(var inputEvent in InputMap.GetActionList(_unit.ActionMap))
-            {
-                if(inputEvent is InputEventJoypadButton joypadButton)
-                {
-                    _actionButton.Texture = gamepad.GetActionButtonTexture(joypadButton.ButtonIndex);
-                    break;
-                }
-            }
+            var inputDeviceMap = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveDeviceMap();
+            _actionButton.Texture = inputDeviceMap.GetTextureForAction(_unit.ActionMap);
         }
 
         private void OnUnitDied()

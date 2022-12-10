@@ -10,9 +10,9 @@ namespace Rpg2d.Godot.Resources
         [Export]
         public GamepadMapResource PlaystationMap { get; set; }
         [Export]
-        public GamepadMapResource KeyboardMap { get; set; }
+        public KeyboardMapResource KeyboardMap { get; set; }
 
-        public GamepadMapResource GetActiveGamepadMap()
+        public IInputDeviceMap GetActiveDeviceMap()
         {
             var gamepads = Input.GetConnectedJoypads();
             if(gamepads.Count > 0)

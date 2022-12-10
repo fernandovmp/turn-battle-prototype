@@ -3,7 +3,7 @@ using Godot;
 namespace Rpg2d.Godot.Resources
 {
 
-    public class GamepadMapResource : Resource
+    public class GamepadMapResource : Resource, IInputDeviceMap
     {
         [Export]
         public string Name { get; set; }
@@ -15,6 +15,15 @@ namespace Rpg2d.Godot.Resources
         public ImageTexture TopDigitalButton { get; set; }
         [Export]
         public ImageTexture RightDigitalButton { get; set; }
+
+        public Texture GetTextureForEvent(object @event)
+        {
+            if(@event is InputEventJoypadButton joypadButton)
+            {
+                return GetActionButtonTexture(joypadButton.ButtonIndex);
+            }
+            return null;
+        }
 
         public Texture GetActionButtonTexture(int buttonIndex)
         {
