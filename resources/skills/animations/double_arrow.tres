@@ -1,9 +1,10 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Godot/Skills/SkillAnimationResource.cs" type="Script" id=1]
 [ext_resource path="res://sprites/animations/FX046_03.png" type="Texture" id=2]
 [ext_resource path="res://sprites/animations/FX046_01.png" type="Texture" id=3]
 [ext_resource path="res://sprites/animations/FX046_02.png" type="Texture" id=4]
+[ext_resource path="res://audio/se/07_human_atk_sword_3.wav" type="AudioStream" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -20,3 +21,4 @@ Animation = "default"
 Frames = SubResource( 1 )
 HitFrames = PoolIntArray( 4, 7 )
 CustomScale = Vector2( 2, 2 )
+HitEffect = ExtResource( 5 )

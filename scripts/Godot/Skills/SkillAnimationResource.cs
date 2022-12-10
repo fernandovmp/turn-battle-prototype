@@ -15,6 +15,8 @@ namespace Rpg2d.Godot.Skills
         public int[] HitFrames { get; set; }
         [Export]
         public Vector2 CustomScale { get; set; } = Vector2.One;
+        [Export]
+        public AudioStream HitEffect { get; set; }
 
         public SkillAnimation AsSkillAnimation() => new SkillAnimation
         {
@@ -22,7 +24,8 @@ namespace Rpg2d.Godot.Skills
             Animation = Animation,
             Frames = Frames,
             HitFrames = HitFrames,
-            CustomScale = CustomScale
+            CustomScale = CustomScale,
+            HitEffect = HitEffect
         };
     }
 }

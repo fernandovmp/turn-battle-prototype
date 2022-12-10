@@ -56,11 +56,12 @@ namespace Rpg2d.Godot.Battle.Actors
             Battler.DealDamage((int)(damage * hitModifier));
         }
 
-        public void AddSkillAnimation(SkillAnimation animation, Action<int> frameChanged)
+        public void AddSkillAnimation(SkillAnimation animation, SkillCaster skillCaster)
         {
             var animatedSkill = new SkillAnimatedSprite();
             animatedSkill.FlipH = FlipSkillAnimation;
-            animatedSkill.FrameChanged = frameChanged;
+            animatedSkill.FrameChanged = skillCaster.OnFrame;
+            skillCaster.Hited += animatedSkill.OnHit;
             _skillAnimationRoot.AddChild(animatedSkill);
             animatedSkill.Play(animation);
         }

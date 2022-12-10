@@ -9,5 +9,6 @@ namespace Rpg2d.Godot.Skills
         public SpriteFrames Frames { get; set; }
         public int[] HitFrames { get; set; }
         public Vector2 CustomScale { get; set; }
+        public AudioStream HitEffect { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace Rpg2d.Godot.Battle.Actors
                     Skill = action.Skill,
                     Target = targetSlot
                 });
-                targetSlot.AddSkillAnimation(action.Skill.Animation, _skillCaster.OnFrame);
+                targetSlot.AddSkillAnimation(action.Skill.Animation, _skillCaster);
             }
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
             _animatedSprite.Play(action.Skill.ActionAnimation);

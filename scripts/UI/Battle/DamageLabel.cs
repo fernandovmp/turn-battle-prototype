@@ -12,7 +12,7 @@ namespace Rpg2d.UI.Battle
         public async void DestroyAfter(float seconds)
         {
             await ToSignal(GetTree().CreateTimer(seconds), "timeout");
-            GetParent().RemoveChild(this);
+            QueueFree();
         }
 
         public void SetStartPosition(Vector2 position)
