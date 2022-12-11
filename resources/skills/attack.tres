@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 Name = "Attack"
-Damage = 2
+Multiplier = 1.0
 IdleAnimation = "idle"
 ActionAnimation = "attack"
 TargetType = 0

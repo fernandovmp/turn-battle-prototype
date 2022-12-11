@@ -8,7 +8,7 @@ namespace Rpg2d.Godot.Skills
         [Export]
         public string Name { get; set; }
         [Export]
-        public int Damage { get; set; }
+        public float Multiplier { get; set; }
         [Export]
         public string IdleAnimation { get; set; } = "idle";
         [Export]
@@ -21,7 +21,7 @@ namespace Rpg2d.Godot.Skills
         public Skill AsSkill() => new Skill
         {
             Name = Name,
-            Damage = Damage,
+            Multiplier = Multiplier,
             IdleAnimation = IdleAnimation,
             ActionAnimation = ActionAnimation,
             Animation = Animation.AsSkillAnimation()

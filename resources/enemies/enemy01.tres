@@ -60,8 +60,8 @@ animations = [ {
 
 [resource]
 script = ExtResource( 3 )
-Name = "enemy01"
-MaxHp = 150
-Attack = 15
+Name = "Skeleton"
+MaxHp = 100
+Attack = 13
 AnimationFrames = SubResource( 8 )
 AttackSkill = ExtResource( 2 )

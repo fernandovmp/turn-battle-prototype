@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Godot/Skills/SkillResource.cs" type="Script" id=1]
-[ext_resource path="res://resources/skills/animations/thrust.tres" type="Resource" id=2]
+[ext_resource path="res://resources/skills/animations/multihit_thrust.tres" type="Resource" id=2]
 
 [resource]
 script = ExtResource( 1 )
-Name = "Thrust"
-Multiplier = 1.2
+Name = null
+Multiplier = 0.4
 IdleAnimation = "idle"
 ActionAnimation = "attack"
-TargetType = 0
+TargetType = 1
 Animation = ExtResource( 2 )

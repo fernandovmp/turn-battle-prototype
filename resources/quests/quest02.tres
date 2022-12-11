@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource( 2 )
-Name = "Quest02"
+Name = "Triple Skeletons"
 Troop = ExtResource( 1 )
 Background = ExtResource( 3 )
 BattleMusic = ExtResource( 4 )

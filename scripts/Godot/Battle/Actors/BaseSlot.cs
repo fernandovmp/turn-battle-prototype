@@ -52,8 +52,8 @@ namespace Rpg2d.Godot.Battle.Actors
         public void DealDamage(int damage)
         {
             int hits = _hitCounter.CountHit();
-            float hitModifier = 1 + 0.2f * (hits - 1);
-            Battler.DealDamage((int)(damage * hitModifier));
+            float hitModifier = 1 + 0.08f * (hits - 1);
+            Battler.DealDamage((int)Math.Ceiling(damage * hitModifier));
         }
 
         public void AddSkillAnimation(SkillAnimation animation, SkillCaster skillCaster)
