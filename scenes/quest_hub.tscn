@@ -22,14 +22,19 @@ _partyBottomUnit = ExtResource( 7 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="QuestScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-margin_left = 224.0
-margin_top = 93.0
-margin_right = 764.0
-margin_bottom = 489.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.0
+margin_top = -198.0
+margin_right = 270.0
+margin_bottom = 198.0
 scroll_horizontal_enabled = false
 
 [node name="QuestList" type="VFlowContainer" parent="CanvasLayer/QuestScrollContainer"]
-margin_right = 540.0
+margin_left = 270.0
+margin_right = 270.0
 margin_bottom = 396.0
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
