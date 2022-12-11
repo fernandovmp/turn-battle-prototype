@@ -10,6 +10,7 @@ namespace Rpg2d.Godot.Battle.AI
         [Export]
         public string Name { get; set; }
 
+        public virtual void Init(ActionContext context) {}
         public abstract IEnumerator<BattleAction> GetActions(ActionContext context);
     }
 }

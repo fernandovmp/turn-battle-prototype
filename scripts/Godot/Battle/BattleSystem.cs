@@ -81,6 +81,7 @@ namespace Rpg2d.Godot.Battle
                 _enemies.Add(enemySlot);
             }
             _targetSelector.Init(_enemies);
+            _troop.AI.Init(GetActionContext());
         }
 
         private void EnemyActionFinished(BattleAction obj)
@@ -153,11 +154,8 @@ namespace Rpg2d.Godot.Battle
                 enemy.ActionEnabled = true;
             }
             var ai = _troop.AI;
-            var actions = ai.GetActions(new ActionContext
-            {
-                Enemies = _enemies,
-                Party = EnumerateUnits()
-            });
+            var actionContext = GetActionContext();
+            var actions = ai.GetActions(actionContext);
             while (actions.MoveNext())
             {
                 var action = actions.Current;
@@ -170,6 +168,15 @@ namespace Rpg2d.Godot.Battle
                     action.Owner.PerformAction(action);
                 }
             }
+        }
+
+        private ActionContext GetActionContext()
+        {
+            return new ActionContext
+            {
+                Enemies = _enemies,
+                Party = EnumerateUnits()
+            };
         }
 
         public IEnumerable<UnitSlot> EnumerateUnits() => EnumerateAllUnits().Where(unit => unit.HasUnit);

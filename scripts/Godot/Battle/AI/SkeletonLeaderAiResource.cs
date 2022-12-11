@@ -23,9 +23,17 @@ namespace Rpg2d.Godot.Battle.AI
         private int _turn;
         private const string SkeletonLeaderName = "Skeleton Leader";
 
+        public override void Init(ActionContext context)
+        {
+            _skeletonLeader = context.Enemies.First(x => x.Battler.Name == SkeletonLeaderName);
+            _skeletons = context.Enemies.Where(x => x.Battler.Name != SkeletonLeaderName);
+            _normalAttackSkill = _nomalAtack.AsSkill();
+            _multihitAtackSkill = _multihitAtack.AsSkill();
+            _turn = 0;
+        }
+
         public override IEnumerator<BattleAction> GetActions(ActionContext context)
         {
-            InitAi(context);
             _turn++;
             var units = context.Party.Where(unit => unit.Battler.Hp > 0);
             int index = (int)GD.RandRange(0, units.Count() - 1);
@@ -72,18 +80,6 @@ namespace Rpg2d.Godot.Battle.AI
             Skill = _multihitAtackSkill,
             TargetGroup = new MultiTargetGroup(units)
         };
-
-        private void InitAi(ActionContext context)
-        {
-            if(_skeletonLeader == null)
-            {
-                _skeletonLeader = context.Enemies.First(x => x.Battler.Name == SkeletonLeaderName);
-                _skeletons = context.Enemies.Where(x => x.Battler.Name != SkeletonLeaderName);
-                _normalAttackSkill = _nomalAtack.AsSkill();
-                _multihitAtackSkill = _multihitAtack.AsSkill();
-                _turn = 0;
-            }
-        }
 
         private BattleAction NormalAttack(IBattlerSlot owner, IBattlerSlot target) => new BattleAction
         {
