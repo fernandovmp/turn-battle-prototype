@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using Rpg2d.Godot.Battle;
 using Rpg2d.Godot.Battle.Actors;
+using Rpg2d.Godot.Extensions;
 using Rpg2d.Godot.Quests;
 using Rpg2d.Services;
 
@@ -22,11 +24,16 @@ namespace Rpg2d.UI.QuestHub
         [Export]
         private UnitResource _partyBottomUnit;
         private Control _questListContainer;
+        private Control _creditsContainer;
+        private Button _creditsButton;
 
         public override void _Ready()
         {
             _questListContainer = GetNode<Control>("CanvasLayer/QuestScrollContainer/QuestList");
             var questList = new List<QuestItem>();
+            _creditsContainer = GetNode<Control>("CanvasLayer/CreditsContainer");
+            _creditsButton = GetNode<Button>("CanvasLayer/CreditsButton");
+            _creditsButton.Connect("pressed", this, nameof(ShowCredits));
             foreach (var quest in _quests)
             {
                 var questItem = _questItemModel.Instance<QuestItem>();
@@ -34,6 +41,7 @@ namespace Rpg2d.UI.QuestHub
                 _questListContainer.AddChild(questItem);
                 questItem.OnPressed += StartQuest;
                 questList.Add(questItem);
+                questItem.FocusNeighbourRight = _creditsButton.GetPath();
             }
             if (questList.Count > 1)
             {
@@ -49,7 +57,37 @@ namespace Rpg2d.UI.QuestHub
             }
             if (questList.Count > 0)
             {
+                _creditsButton.FocusNeighbourLeft = questList[0].GetPath();
                 questList[0].GrabFocus();
+            }
+        }
+
+        private void ShowCredits()
+        {
+            ShowCredits(show: true);
+        }
+
+        private void ShowCredits(bool show)
+        {
+            if(show)
+            {
+                var file = new File();
+                var credits = file.ReadAllText("res://credits.txt");
+                var label = _creditsContainer.GetChild<Label>(0);
+                label.Text = credits;
+            }
+            _creditsContainer.Visible = show;
+            _creditsButton.Visible = !show;
+            _questListContainer.Visible = !show;
+        }
+
+        public override void _Input(InputEvent @event)
+        {
+            if(_creditsContainer?.Visible == true && @event.IsActionPressed("ui_cancel"))
+            {
+                ShowCredits(show: false);
+                var quest = _questListContainer.GetChildOrNull<QuestItem>(0);
+                quest?.GrabFocus();
             }
         }
 
