@@ -24,14 +24,15 @@ namespace TurnBattle.UI.QuestHub
         [Export]
         private UnitResource _partyBottomUnit;
         private Control _questListContainer;
-        private Control _creditsContainer;
+        private ScrollContainer _creditsContainer;
         private Button _creditsButton;
+        private const int ScrollSpeed = 50;
 
         public override void _Ready()
         {
             _questListContainer = GetNode<Control>("CanvasLayer/QuestScrollContainer/QuestList");
             var questList = new List<QuestItem>();
-            _creditsContainer = GetNode<Control>("CanvasLayer/CreditsContainer");
+            _creditsContainer = GetNode<ScrollContainer>("CanvasLayer/CreditsContainer");
             _creditsButton = GetNode<Button>("CanvasLayer/CreditsButton");
             _creditsButton.Connect("pressed", this, nameof(ShowCredits));
             foreach (var quest in _quests)
@@ -83,11 +84,27 @@ namespace TurnBattle.UI.QuestHub
 
         public override void _Input(InputEvent @event)
         {
-            if(_creditsContainer?.Visible == true && @event.IsActionPressed("ui_cancel"))
+            if(_creditsContainer?.Visible == true)
+            {
+                HandleCreditsInput(@event);
+            }
+        }
+
+        private void HandleCreditsInput(InputEvent @event)
+        {
+            if(@event.IsActionPressed("ui_cancel"))
             {
                 ShowCredits(show: false);
                 var quest = _questListContainer.GetChildOrNull<QuestItem>(0);
                 quest?.GrabFocus();
+            }
+            else if(@event.IsActionPressed("ui_down", allowEcho: true))
+            {
+                _creditsContainer.ScrollVertical += ScrollSpeed;
+            }
+            else if(@event.IsActionPressed("ui_up", allowEcho: true))
+            {
+                _creditsContainer.ScrollVertical -= ScrollSpeed;
             }
         }
 
