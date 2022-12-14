@@ -8,15 +8,15 @@ namespace TurnBattle.Godot.Resources
         [Export]
         public string Name { get; set; }
         [Export]
-        public ImageTexture A { get; set; }
+        public Texture A { get; set; }
         [Export]
-        public ImageTexture W { get; set; }
+        public Texture W { get; set; }
         [Export]
-        public ImageTexture S { get; set; }
+        public Texture S { get; set; }
         [Export]
-        public ImageTexture D { get; set; }
+        public Texture D { get; set; }
         [Export]
-        public ImageTexture Space { get; set; }
+        public Texture Space { get; set; }
 
         public Texture GetTextureForEvent(object @event)
         {

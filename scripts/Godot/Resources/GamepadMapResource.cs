@@ -8,13 +8,13 @@ namespace TurnBattle.Godot.Resources
         [Export]
         public string Name { get; set; }
         [Export]
-        public ImageTexture BottomDigitalButton { get; set; }
+        public Texture BottomDigitalButton { get; set; }
         [Export]
-        public ImageTexture LeftDigitalButton { get; set; }
+        public Texture LeftDigitalButton { get; set; }
         [Export]
-        public ImageTexture TopDigitalButton { get; set; }
+        public Texture TopDigitalButton { get; set; }
         [Export]
-        public ImageTexture RightDigitalButton { get; set; }
+        public Texture RightDigitalButton { get; set; }
 
         public Texture GetTextureForEvent(object @event)
         {
