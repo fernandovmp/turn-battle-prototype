@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Rpg2d.Battle.Actors;
+using TurnBattle.Battle.Actors;
 
-namespace Rpg2d.Battle.Actions
+namespace TurnBattle.Battle.Actions
 {
     public class ActionContext
     {

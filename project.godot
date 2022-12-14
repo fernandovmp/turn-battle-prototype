@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Rpg2d"
+config/name="TurnBattlePrototype"
 run/main_scene="res://scenes/quest_hub.tscn"
 config/icon="res://icon.png"
 
@@ -63,7 +63,7 @@ battle_right_unit_action={
 
 [mono]
 
-project/assembly_name="Rpg2d"
+project/assembly_name="TurnBattle"
 
 [physics]
 

@@ -1,4 +1,4 @@
-namespace Rpg2d.Godot.Battle.Actors
+namespace TurnBattle.Godot.Battle.Actors
 {
     public class BattleEnemy : BaseBattler
     {

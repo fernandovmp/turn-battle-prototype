@@ -1,8 +1,8 @@
 using Godot;
-using Rpg2d.Battle.AI;
-using Rpg2d.Godot.Battle.AI;
+using TurnBattle.Battle.AI;
+using TurnBattle.Godot.Battle.AI;
 
-namespace Rpg2d.Godot.Battle.Actors
+namespace TurnBattle.Godot.Battle.Actors
 {
     public class EnemyTroopResource : Resource
     {

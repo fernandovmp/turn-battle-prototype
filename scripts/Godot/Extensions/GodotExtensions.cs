@@ -1,7 +1,7 @@
 using System.Text;
 using Godot;
 
-namespace Rpg2d.Godot.Extensions
+namespace TurnBattle.Godot.Extensions
 {
     public static class GodotExtensions
     {

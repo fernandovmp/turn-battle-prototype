@@ -1,7 +1,7 @@
-using Rpg2d.Battle.Actors;
-using Rpg2d.Skills;
+using TurnBattle.Battle.Actors;
+using TurnBattle.Skills;
 
-namespace Rpg2d.Battle.Actions
+namespace TurnBattle.Battle.Actions
 {
     public class BattleAction
     {

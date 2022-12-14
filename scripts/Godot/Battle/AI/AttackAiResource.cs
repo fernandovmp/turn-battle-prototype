@@ -1,12 +1,12 @@
 using Godot;
-using Rpg2d.Battle.Actions;
-using Rpg2d.Battle.Actors;
-using Rpg2d.Godot.Skills;
-using Rpg2d.Skills;
+using TurnBattle.Battle.Actions;
+using TurnBattle.Battle.Actors;
+using TurnBattle.Godot.Skills;
+using TurnBattle.Skills;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rpg2d.Godot.Battle.AI
+namespace TurnBattle.Godot.Battle.AI
 {
     public class AttackAiResource : AiResource
     {

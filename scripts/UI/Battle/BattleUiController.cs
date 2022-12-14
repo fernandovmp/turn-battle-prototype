@@ -1,8 +1,8 @@
 using Godot;
-using Rpg2d.Battle;
-using Rpg2d.Godot.Battle;
+using TurnBattle.Battle;
+using TurnBattle.Godot.Battle;
 
-namespace Rpg2d.UI.Battle
+namespace TurnBattle.UI.Battle
 {
     public class BattleUiController : Node
     {

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Rpg2d.Skills
+namespace TurnBattle.Skills
 {
     public enum TargetTypeEnum
     {

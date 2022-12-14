@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rpg2d.Skills;
+using TurnBattle.Skills;
 using Godot;
 
-namespace Rpg2d.Godot.Skills
+namespace TurnBattle.Godot.Skills
 {
     public class SkillCaster
     {

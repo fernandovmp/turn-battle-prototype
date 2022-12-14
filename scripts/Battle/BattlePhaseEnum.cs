@@ -1,4 +1,4 @@
-namespace Rpg2d.Battle
+namespace TurnBattle.Battle
 {
     public enum BattlePhaseEnum
     {

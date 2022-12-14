@@ -1,8 +1,8 @@
 using System;
 using Godot;
-using Rpg2d.Godot.Quests;
+using TurnBattle.Godot.Quests;
 
-namespace Rpg2d.UI.QuestHub
+namespace TurnBattle.UI.QuestHub
 {
     public class QuestItem : Button
     {

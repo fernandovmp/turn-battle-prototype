@@ -1,7 +1,7 @@
 using System;
-using Rpg2d.Godot.Skills;
+using TurnBattle.Godot.Skills;
 
-namespace Rpg2d.Skills
+namespace TurnBattle.Skills
 {
     public class Skill
     {

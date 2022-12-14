@@ -1,6 +1,6 @@
-using Rpg2d.Battle.Actors;
+using TurnBattle.Battle.Actors;
 
-namespace Rpg2d.Skills
+namespace TurnBattle.Skills
 {
     public class CastContext
     {

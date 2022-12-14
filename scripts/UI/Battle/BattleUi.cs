@@ -1,10 +1,10 @@
 using Godot;
-using Rpg2d.Battle.Actors;
-using Rpg2d.Godot.Battle;
-using Rpg2d.Godot.Battle.Actors;
+using TurnBattle.Battle.Actors;
+using TurnBattle.Godot.Battle;
+using TurnBattle.Godot.Battle.Actors;
 using System.Collections.Generic;
 
-namespace Rpg2d.UI.Battle
+namespace TurnBattle.UI.Battle
 {
     public class BattleUi : Control
     {

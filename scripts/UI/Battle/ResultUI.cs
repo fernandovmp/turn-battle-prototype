@@ -1,7 +1,7 @@
 using Godot;
-using Rpg2d.Godot.Resources;
+using TurnBattle.Godot.Resources;
 
-namespace Rpg2d.UI.Battle
+namespace TurnBattle.UI.Battle
 {
     public class ResultUI : Panel
     {

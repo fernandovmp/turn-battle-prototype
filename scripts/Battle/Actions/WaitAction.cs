@@ -1,6 +1,6 @@
-using Rpg2d.Battle.Actions;
+using TurnBattle.Battle.Actions;
 
-namespace Rpg2d.Battle.Actions
+namespace TurnBattle.Battle.Actions
 {
     public class WaitAction : BattleAction
     {

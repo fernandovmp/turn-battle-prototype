@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Godot;
 
-namespace Rpg2d.Battle
+namespace TurnBattle.Battle
 {
     public class HitCounter
     {

@@ -1,9 +1,9 @@
 using Godot;
-using Rpg2d.Battle.Actions;
-using Rpg2d.Battle.AI;
+using TurnBattle.Battle.Actions;
+using TurnBattle.Battle.AI;
 using System.Collections.Generic;
 
-namespace Rpg2d.Godot.Battle.AI
+namespace TurnBattle.Godot.Battle.AI
 {
     public abstract class AiResource : Resource, IBattleAI
     {

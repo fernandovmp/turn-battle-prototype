@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Rpg2d.UI.Battle
+namespace TurnBattle.UI.Battle
 {
     public class DamageLabel : Label
     {

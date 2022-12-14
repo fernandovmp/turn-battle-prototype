@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Rpg2d.Battle.Actions;
+using TurnBattle.Battle.Actions;
 
-namespace Rpg2d.Battle.AI
+namespace TurnBattle.Battle.AI
 {
     public interface IBattleAI
     {

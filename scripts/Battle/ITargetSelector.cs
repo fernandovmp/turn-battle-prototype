@@ -1,7 +1,7 @@
 using System;
-using Rpg2d.Battle.Actors;
+using TurnBattle.Battle.Actors;
 
-namespace Rpg2d.Battle
+namespace TurnBattle.Battle
 {
     public interface ITargetSelector
     {

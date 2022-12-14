@@ -1,14 +1,14 @@
 using Godot;
-using Rpg2d.Battle;
-using Rpg2d.Battle.Actions;
-using Rpg2d.Battle.Actors;
-using Rpg2d.Godot.Battle.Actors;
-using Rpg2d.Skills;
+using TurnBattle.Battle;
+using TurnBattle.Battle.Actions;
+using TurnBattle.Battle.Actors;
+using TurnBattle.Godot.Battle.Actors;
+using TurnBattle.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rpg2d.Godot.Battle
+namespace TurnBattle.Godot.Battle
 {
     public class BattleSystem : Node
     {
@@ -136,12 +136,12 @@ namespace Rpg2d.Godot.Battle
 
         private void EndBattle(BattlePhaseEnum phase)
         {
+            Phase = phase;
             foreach (var unit in EnumerateUnits())
             {
                 unit.ActionEnabled = false;
             }
             TargetSelector.Enabled = false;
-            Phase = phase;
         }
 
         private async void StartEnemyTurn()

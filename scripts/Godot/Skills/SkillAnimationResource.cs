@@ -1,7 +1,7 @@
 using Godot;
-using Rpg2d.Skills;
+using TurnBattle.Skills;
 
-namespace Rpg2d.Godot.Skills
+namespace TurnBattle.Godot.Skills
 {
     public class SkillAnimationResource : Resource
     {

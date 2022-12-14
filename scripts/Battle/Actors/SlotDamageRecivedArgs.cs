@@ -1,4 +1,4 @@
-namespace Rpg2d.Battle.Actors
+namespace TurnBattle.Battle.Actors
 {
     public class SlotDamageRecivedArgs
     {

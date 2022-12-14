@@ -1,12 +1,12 @@
 using Godot;
-using Rpg2d.Battle;
-using Rpg2d.Battle.Actions;
-using Rpg2d.Battle.Actors;
-using Rpg2d.Godot.Skills;
+using TurnBattle.Battle;
+using TurnBattle.Battle.Actions;
+using TurnBattle.Battle.Actors;
+using TurnBattle.Godot.Skills;
 using System;
 using System.Threading.Tasks;
 
-namespace Rpg2d.Godot.Battle.Actors
+namespace TurnBattle.Godot.Battle.Actors
 {
     public abstract class BaseSlot : Node2D, IBattlerSlot
     {

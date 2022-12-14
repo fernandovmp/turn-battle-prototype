@@ -1,10 +1,10 @@
 using System;
 using Godot;
-using Rpg2d.Battle.Actors;
-using Rpg2d.Godot.Battle.Actors;
-using Rpg2d.Godot.Resources;
+using TurnBattle.Battle.Actors;
+using TurnBattle.Godot.Battle.Actors;
+using TurnBattle.Godot.Resources;
 
-namespace Rpg2d.UI.Battle
+namespace TurnBattle.UI.Battle
 {
     public class ActionHudContainer : Container
     {

@@ -1,6 +1,6 @@
-using Rpg2d.Godot.Battle.Actors;
+using TurnBattle.Godot.Battle.Actors;
 
-namespace Rpg2d.Godot.Battle
+namespace TurnBattle.Godot.Battle
 {
     public class BattleSystemContext
     {

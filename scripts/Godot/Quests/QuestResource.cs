@@ -1,7 +1,7 @@
 using Godot;
-using Rpg2d.Godot.Battle.Actors;
+using TurnBattle.Godot.Battle.Actors;
 
-namespace Rpg2d.Godot.Quests
+namespace TurnBattle.Godot.Quests
 {
     public class QuestResource : Resource
     {

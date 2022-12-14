@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Rpg2d.Godot.Resources
+namespace TurnBattle.Godot.Resources
 {
 
     public class KeyboardMapResource : Resource, IInputDeviceMap

@@ -1,7 +1,7 @@
 using System;
-using Rpg2d.Battle.Actions;
+using TurnBattle.Battle.Actions;
 
-namespace Rpg2d.Battle.Actors
+namespace TurnBattle.Battle.Actors
 {
     public interface IBattlerSlot
     {

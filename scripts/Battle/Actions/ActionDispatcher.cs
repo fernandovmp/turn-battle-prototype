@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rpg2d.Battle.Actions
+namespace TurnBattle.Battle.Actions
 {
     public class ActionDispatcher : IActionDispatcher
     {

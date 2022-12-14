@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Rpg2d.Godot.Skills
+namespace TurnBattle.Godot.Skills
 {
     public class SkillAnimation
     {

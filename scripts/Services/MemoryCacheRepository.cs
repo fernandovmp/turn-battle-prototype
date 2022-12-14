@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Rpg2d.Services
+namespace TurnBattle.Services
 {
     public class MemoryCacheRepository
     {

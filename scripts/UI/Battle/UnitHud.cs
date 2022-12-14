@@ -1,7 +1,7 @@
 using Godot;
-using Rpg2d.Battle.Actors;
+using TurnBattle.Battle.Actors;
 
-namespace Rpg2d.UI.Battle
+namespace TurnBattle.UI.Battle
 {
     public class UnitHud : Node
     {

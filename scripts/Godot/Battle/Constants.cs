@@ -1,4 +1,4 @@
-namespace Rpg2d.Godot.Battle
+namespace TurnBattle.Godot.Battle
 {
     public class Constants
     {

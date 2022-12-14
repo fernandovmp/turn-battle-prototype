@@ -1,8 +1,8 @@
 using Godot;
-using Rpg2d.Services;
-using Rpg2d.UI.Battle;
+using TurnBattle.Services;
+using TurnBattle.UI.Battle;
 
-namespace Rpg2d.Godot.Battle
+namespace TurnBattle.Godot.Battle
 {
     public class BattleScene : Node
     {
