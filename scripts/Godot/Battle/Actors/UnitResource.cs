@@ -15,5 +15,7 @@ namespace TurnBattle.Godot.Battle.Actors
         public SpriteFrames AnimationFrames { get; set; }
         [Export]
         public SkillResource AttackSkill { get; set; }
+        [Export]
+        public SkillResource[] Skills { get; set; }
     }
 }

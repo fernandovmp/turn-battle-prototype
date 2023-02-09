@@ -188,5 +188,13 @@ namespace TurnBattle.Godot.Battle
             yield return _leftUnit;
             yield return _bottomUnit;
         }
+
+        public override void _Input(InputEvent inputEvent)
+        {
+            if (inputEvent.IsActionPressed("battle_open_skill_ui"))
+            {
+                GetNode<UI.Battle.ActionSelectionUI>("/root/Root/CanvasLayer/ActionSelectionUI").Show(EnumerateUnits());
+            }
+        }
     }
 }

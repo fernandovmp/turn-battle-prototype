@@ -61,3 +61,4 @@ MaxHp = 100
 Attack = 10
 AnimationFrames = SubResource( 8 )
 AttackSkill = ExtResource( 3 )
+Skills = null
