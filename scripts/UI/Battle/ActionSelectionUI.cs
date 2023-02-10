@@ -4,6 +4,7 @@ using System.Linq;
 using Godot;
 using TurnBattle.Godot.Battle.Actors;
 using TurnBattle.Services;
+using TurnBattle.Skills;
 using TurnBattle.UI.Controls;
 
 namespace TurnBattle.UI.Battle
@@ -46,8 +47,21 @@ namespace TurnBattle.UI.Battle
             var unit = (BattleUnit)unitSlot.Battler;
             _unitName.Text = unit.Name;
             _skillList.Clear();
-            _skillList.AddRange(unit.Skills.Select(skill => new SkillItem(skill)));
+            _skillList.AddRange(unit.Skills.Select(skill =>
+            {
+                var button = new SkillItem(skill);
+                button.OnPressed += SelectSkill;
+                return button;
+            }));
             _skillList.FocusFirst();
+        }
+
+        private void SelectSkill(Skill skill)
+        {
+            var unit = _units.Current;
+            unit.SelectedAction.Select(skill, null);
+            unit.ActionChange?.Invoke();
+            Hide();
         }
     }
 }

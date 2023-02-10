@@ -18,7 +18,9 @@ namespace TurnBattle.Godot.Battle.Actors
         private SkillCaster _skillCaster;
         public BattleAction SelectedAction => _selectedAction;
         public string ActionMap => _actionMap;
-    
+
+        public Action ActionChange { get; set; }
+
         public override void _Ready()
         {
             base._Ready();

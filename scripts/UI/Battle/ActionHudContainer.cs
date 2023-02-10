@@ -86,6 +86,7 @@ namespace TurnBattle.UI.Battle
         {
             _unit = unit;
             _unit.Died += OnUnitDied;
+            _unit.ActionChange += OnActionChange;
             _actionLabel.Text = _unit.SelectedAction.Skill.Name;
             var inputDeviceMap = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveDeviceMap();
             _actionButton.Texture = inputDeviceMap.GetTextureForAction(_unit.ActionMap);
@@ -94,6 +95,11 @@ namespace TurnBattle.UI.Battle
         private void OnUnitDied()
         {
             Visible = false;
+        }
+
+        private void OnActionChange()
+        {
+            _actionLabel.Text = _unit.SelectedAction.Skill.Name;
         }
 
         public enum DirectionEnum
