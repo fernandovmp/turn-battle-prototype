@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 namespace TurnBattle.UI.Controls
 {
@@ -20,6 +21,7 @@ namespace TurnBattle.UI.Controls
             foreach (var item in items)
             {
                 _listContainer.AddChild(item);
+                item.Connect("focus_entered", this, nameof(OnItemFocus), new Array(item));
                 _items.Add(item);
             }
             if (_items.Count > 1)
@@ -36,10 +38,16 @@ namespace TurnBattle.UI.Controls
             }
         }
 
+        private void OnItemFocus(Control item)
+        {
+            ScrollVertical = (int)(_items.FindIndex(x => x == item) * item.RectSize.y);
+        }
+
         public void Clear()
         {
             foreach(var child in _items)
             {
+                child.Disconnect("focus_entered", this, nameof(OnItemFocus));
                 _listContainer.RemoveChild(child);
             }
             _items.Clear();
