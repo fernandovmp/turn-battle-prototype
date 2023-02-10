@@ -53,6 +53,7 @@ namespace TurnBattle.UI.Battle
             _skillList.AddRange(unit.Skills.Select(skill =>
             {
                 var button = new SkillItem(skill);
+                button.RectSize = new Vector2(100, 30);
                 button.OnPressed += SelectSkill;
                 return button;
             }));
@@ -62,8 +63,12 @@ namespace TurnBattle.UI.Battle
         private void SelectSkill(Skill skill)
         {
             var unit = _units.Current;
-            unit.SelectedAction.Select(skill, null);
-            unit.ActionChange?.Invoke();
+            ITargetGroup target = null;
+            if(skill.TargetType == TargetTypeEnum.Multi)
+            {
+                target = new MultiTargetGroup(_battleSystem.Enemies.Where(x => !x.IsDead));
+            }
+            unit.SelectedAction.Select(skill, target);
             CloseMenu();
         }
 

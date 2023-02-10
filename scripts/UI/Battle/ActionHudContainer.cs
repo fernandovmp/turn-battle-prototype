@@ -86,7 +86,7 @@ namespace TurnBattle.UI.Battle
         {
             _unit = unit;
             _unit.Died += OnUnitDied;
-            _unit.ActionChange += OnActionChange;
+            _unit.SelectedAction.ActionChange += OnActionChange;
             _actionLabel.Text = _unit.SelectedAction.Skill.Name;
             var inputDeviceMap = ResourceLoader.Load<GamepadManagerResource>("res://resources//gamepad/GamepadManager.tres").GetActiveDeviceMap();
             _actionButton.Texture = inputDeviceMap.GetTextureForAction(_unit.ActionMap);

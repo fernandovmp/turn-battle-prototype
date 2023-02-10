@@ -24,7 +24,8 @@ namespace TurnBattle.Godot.Skills
             Multiplier = Multiplier,
             IdleAnimation = IdleAnimation,
             ActionAnimation = ActionAnimation,
-            Animation = Animation.AsSkillAnimation()
+            Animation = Animation.AsSkillAnimation(),
+            TargetType = TargetType
         };
     }
 }
