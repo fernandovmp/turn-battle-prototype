@@ -16,6 +16,7 @@
 [ext_resource path="res://scenes/battle/ActionHud.tscn" type="PackedScene" id=14]
 [ext_resource path="res://audio/bgm/BGM07battle3.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/battle/ActionSelectionUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://styles/ui_default_theme.tres" type="Theme" id=17]
 
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
@@ -56,9 +57,6 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.705882 )
 
 [sub_resource type="DynamicFont" id=23]
 size = 32
@@ -183,7 +181,7 @@ margin_left = -359.0
 margin_top = -66.5
 margin_right = 359.0
 margin_bottom = 66.5
-custom_styles/panel = SubResource( 22 )
+theme = ExtResource( 17 )
 script = ExtResource( 3 )
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/ResultUI"]
