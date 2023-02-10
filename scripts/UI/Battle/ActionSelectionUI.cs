@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using TurnBattle.Godot.Battle;
 using TurnBattle.Godot.Battle.Actors;
 using TurnBattle.Services;
 using TurnBattle.Skills;
@@ -11,12 +12,14 @@ namespace TurnBattle.UI.Battle
 {
     public class ActionSelectionUI : Panel
     {
+        private BattleSystem _battleSystem;
         private NavigableCollection<UnitSlot> _units;
         private ScrollList _skillList;
         private Label _unitName;
 
-        public void Show(IEnumerable<UnitSlot> units)
+        public void Show(IEnumerable<UnitSlot> units, BattleSystem battleSystem)
         {
+            _battleSystem = battleSystem;
             _units = new NavigableCollection<UnitSlot>(units);
             _unitName = GetNode<Label>("Container/CurrentUnitContainer/Label");
             _skillList = GetNode<ScrollList>("Container/SkillList");
@@ -38,7 +41,7 @@ namespace TurnBattle.UI.Battle
             }
             else if(inputEvent.IsActionPressed("ui_cancel"))
             {
-                Hide();
+                CloseMenu();
             }
         }
 
@@ -61,6 +64,12 @@ namespace TurnBattle.UI.Battle
             var unit = _units.Current;
             unit.SelectedAction.Select(skill, null);
             unit.ActionChange?.Invoke();
+            CloseMenu();
+        }
+
+        public void CloseMenu()
+        {
+            _battleSystem.SetInput(true);
             Hide();
         }
     }

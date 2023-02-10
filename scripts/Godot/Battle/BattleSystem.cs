@@ -193,7 +193,17 @@ namespace TurnBattle.Godot.Battle
         {
             if (inputEvent.IsActionPressed("battle_open_skill_ui"))
             {
-                GetNode<UI.Battle.ActionSelectionUI>("/root/Root/CanvasLayer/ActionSelectionUI").Show(EnumerateUnits());
+                SetInput(false);
+                GetNode<UI.Battle.ActionSelectionUI>("/root/Root/CanvasLayer/ActionSelectionUI").Show(EnumerateUnits(), this);
+            }
+        }
+
+        internal void SetInput(bool enabled)
+        {
+            _targetSelector.Enabled = enabled;
+            foreach(var x in EnumerateUnits())
+            {
+                x.SetProcessInput(enabled);
             }
         }
     }
