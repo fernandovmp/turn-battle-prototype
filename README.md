@@ -11,4 +11,16 @@ Limitations in this version:
 
     Each character have only one possible action
 
-This prototype uses free game assets, the credits for them can be found in the "credits" button in the game.
+This prototype uses free game assets, the credits for them can be found [here](./credits.txt)
+
+## Clone
+
+```
+git clone git@github.com:fernandovmp/turn-battle-prototype.git
+
+cd turn-battle-prototype
+
+git lfs pull
+
+```
+
