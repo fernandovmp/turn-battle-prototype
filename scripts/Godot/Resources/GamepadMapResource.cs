@@ -15,6 +15,10 @@ namespace TurnBattle.Godot.Resources
         public Texture TopDigitalButton { get; set; }
         [Export]
         public Texture RightDigitalButton { get; set; }
+        [Export]
+        public Texture LeftArrow { get; set; }
+        [Export]
+        public Texture RightArrow { get; set; }
 
         public Texture GetTextureForEvent(object @event)
         {
@@ -37,6 +41,10 @@ namespace TurnBattle.Godot.Resources
                     return LeftDigitalButton;
                 case 3:
                     return TopDigitalButton;
+                case 14:
+                    return LeftArrow;
+                case 15:
+                    return RightArrow;
                 default:
                     return null;
             }
