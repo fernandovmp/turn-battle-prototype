@@ -29,6 +29,10 @@ namespace TurnBattle.UI.Battle
 
         public override void _Input(InputEvent inputEvent)
         {
+            if(!Visible)
+            {
+                return;
+            }
             if(inputEvent.IsActionPressed("ui_right"))
             {
                 _units.Next();
