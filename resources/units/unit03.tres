@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=12 format=2]
+[gd_resource type="Resource" load_steps=13 format=2]
 
 [ext_resource path="res://resources/skills/hammer_attack.tres" type="Resource" id=1]
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitResource.cs" type="Script" id=2]
 [ext_resource path="res://sprites/unit03.png" type="Texture" id=3]
+[ext_resource path="res://resources/skills/fire_impact.tres" type="Resource" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -57,4 +58,4 @@ MaxHp = 90
 Attack = 12
 AnimationFrames = SubResource( 8 )
 AttackSkill = ExtResource( 1 )
-Skills = null
+Skills = [ ExtResource( 1 ), ExtResource( 4 ) ]

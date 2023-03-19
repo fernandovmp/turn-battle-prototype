@@ -1,9 +1,8 @@
-[gd_resource type="Resource" load_steps=17 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://resources/skills/spear_attack.tres" type="Resource" id=1]
 [ext_resource path="res://sprites/unit02.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitResource.cs" type="Script" id=3]
-[ext_resource path="res://resources/skills/attack.tres" type="Resource" id=4]
 [ext_resource path="res://resources/skills/multihit_attack.tres" type="Resource" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -71,4 +70,4 @@ MaxHp = 98
 Attack = 12
 AnimationFrames = SubResource( 11 )
 AttackSkill = ExtResource( 1 )
-Skills = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ) ]
+Skills = [ ExtResource( 1 ), ExtResource( 5 ) ]
