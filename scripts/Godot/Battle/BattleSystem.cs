@@ -194,8 +194,12 @@ namespace TurnBattle.Godot.Battle
             var units = EnumerateUnits().Where(unit => unit.CanAct);
             if (inputEvent.IsActionPressed("battle_open_skill_ui") && Phase == BattlePhaseEnum.PartyTurn && units.Any())
             {
-                SetInput(false);
-                GetNode<UI.Battle.ActionSelectionUI>("/root/Root/CanvasLayer/ActionSelectionUI").Show(units, this);
+                var actionSelectionUI = GetNode<UI.Battle.ActionSelectionUI>("/root/Root/CanvasLayer/ActionSelectionUI");
+                if(!actionSelectionUI.Visible)
+                {
+                    SetInput(false);
+                    actionSelectionUI.Show(units, this);
+                }
             }
         }
 
