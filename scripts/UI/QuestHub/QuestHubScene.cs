@@ -66,7 +66,7 @@ namespace TurnBattle.UI.QuestHub
 		{
 			var file = new File();
 			var credits = file.ReadAllText("res://credits.txt");
-			var label = _creditsContainer.GetChild<Label>(0);
+			var label = _creditsContainer.GetChild(0).GetChild<Label>(0);
 			label.Text = credits;
 		}
 

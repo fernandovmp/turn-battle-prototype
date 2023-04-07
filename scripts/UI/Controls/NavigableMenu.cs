@@ -11,8 +11,11 @@ namespace TurnBattle.UI.Controls
 
         public void NavigateTo(IMenu menu)
         {
-            Current?.Hide();
-            Previous.Push(Current);
+            if(Current != null)
+            {
+                Current.Hide();
+                Previous.Push(Current);
+            }
             Current = menu;
             Open(Current);
         }
