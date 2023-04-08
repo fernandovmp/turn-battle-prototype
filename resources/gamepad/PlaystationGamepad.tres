@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Godot/Resources/GamepadMapResource.cs" type="Script" id=1]
 [ext_resource path="res://sprites/gamepad/ps/Button - PS Square 1.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://sprites/gamepad/ps/Button - PS Circle 1.png" type="Texture" id=5]
 [ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Left.png" type="Texture" id=6]
 [ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Right.png" type="Texture" id=7]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Options.png" type="Texture" id=8]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Down.png" type="Texture" id=9]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Up.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
@@ -16,4 +19,7 @@ LeftDigitalButton = ExtResource( 2 )
 TopDigitalButton = ExtResource( 4 )
 RightDigitalButton = ExtResource( 5 )
 LeftArrow = ExtResource( 6 )
+UpArrow = ExtResource( 10 )
 RightArrow = ExtResource( 7 )
+DownArrow = ExtResource( 9 )
+Start = ExtResource( 8 )

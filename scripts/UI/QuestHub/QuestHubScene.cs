@@ -24,10 +24,13 @@ namespace TurnBattle.UI.QuestHub
 		private UnitResource _partyRightUnit;
 		[Export]
 		private UnitResource _partyBottomUnit;
+		[Export]
+		private PackedScene _controlItemModel;
 		private ScrollList _questContainer;
 		private Control _questListContainer;
 		private ScrollContainer _creditsContainer;
-		private Button _creditsButton;
+        private ScrollContainer _controlsContainer;
+        private Button _creditsButton;
         private NavigableMenu _navigableMenu;
         private const int ScrollSpeed = 50;
 
@@ -36,6 +39,7 @@ namespace TurnBattle.UI.QuestHub
 			_questContainer = GetNode<ScrollList>("CanvasLayer/QuestScrollContainer");
 			var questList = new List<QuestItem>();
 			_creditsContainer = GetNode<ScrollContainer>("CanvasLayer/CreditsContainer");
+			_controlsContainer = GetNode<ScrollContainer>("CanvasLayer/ControlsContainer");
 			MakeMenu();
 			foreach (var quest in _quests)
 			{
@@ -44,8 +48,33 @@ namespace TurnBattle.UI.QuestHub
 				questItem.OnPressed += StartQuest;
 				questList.Add(questItem);
 			}
+			MakeControlList();
 			_questContainer.AddRange(questList);
 		}
+
+        private void MakeControlList()
+        {
+			Func<string, string> actionText = (unit) => $"(Battle) Attack with {unit} unit";
+            var controls = new List<Tuple<string, string>>()
+			{
+				new Tuple<string, string>("battle_open_skill_ui", "(Battle) Open the skill menu to change a unit action"),
+				new Tuple<string, string>("battle_enemy_up", "(Battle) Change the target"),
+				new Tuple<string, string>("battle_enemy_down", "(Battle) Change the target"),
+				new Tuple<string, string>("battle_left_unit_action", actionText("left")),
+				new Tuple<string, string>("battle_up_unit_action", actionText("up")),
+				new Tuple<string, string>("battle_right_unit_action", actionText("right")),
+				new Tuple<string, string>("battle_bottom_unit_action", actionText("bottom")),
+				new Tuple<string, string>("ui_accept", "(UI) Confirm"),
+				new Tuple<string, string>("ui_cancel", "(UI) Cancel / Return")
+			};
+			var controlListContainer = _controlsContainer.GetNode("PanelContainer/ListContainer");
+			foreach(var control in controls)
+			{
+				var controlItem = _controlItemModel.Instance<ControlItem>();
+				controlItem.SetControl(control.Item1, control.Item2);
+				controlListContainer.AddChild(controlItem);
+			}
+        }
 
         private void MakeMenu()
         {
@@ -53,9 +82,11 @@ namespace TurnBattle.UI.QuestHub
 			_navigableMenu = new NavigableMenu();
 			var questMenu = new GenericMenu(_questContainer, () => _questContainer.FocusFirst());
 			var creditsMenu = new GenericMenu(_creditsContainer, ShowCredits);
+			var controlsMenu = new GenericMenu(_controlsContainer);
 			rootScroll.AddRange(new MenuItem[]
 			{
 				new MenuItem(_navigableMenu, questMenu, "Quests").WithSize(200, 50),
+				new MenuItem(_navigableMenu, controlsMenu, "Controls").WithSize(200, 50),
 				new MenuItem(_navigableMenu, creditsMenu, "Credits").WithSize(200, 50)
 			});
             var rootMenu = new GenericMenu(rootScroll, () => rootScroll.FocusFirst());
