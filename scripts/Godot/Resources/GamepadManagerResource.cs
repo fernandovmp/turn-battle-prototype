@@ -32,15 +32,11 @@ namespace TurnBattle.Godot.Resources
             if(gamepads.Count > 0)
             {
                 var gamepad = Input.GetJoyName((int)gamepads[0]).ToLowerInvariant();
-                if(_xboxNames.Any(name => gamepad.Contains(name)))
-                {
-                    return XboxMap;
-                }
                 if(_playstationNames.Any(name => gamepad.Contains(name)))
                 {
                     return PlaystationMap;
                 }
-                
+                return XboxMap;
             }
             return KeyboardMap;
         }
