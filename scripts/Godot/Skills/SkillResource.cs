@@ -17,6 +17,8 @@ namespace TurnBattle.Godot.Skills
         public TargetTypeEnum TargetType { get; set; }
         [Export]
         public SkillAnimationResource Animation { get; set; }
+        [Export]
+        public int Cost { get; set; }
 
         public Skill AsSkill() => new Skill
         {
@@ -25,7 +27,8 @@ namespace TurnBattle.Godot.Skills
             IdleAnimation = IdleAnimation,
             ActionAnimation = ActionAnimation,
             Animation = Animation.AsSkillAnimation(),
-            TargetType = TargetType
+            TargetType = TargetType,
+            Cost = Cost
         };
     }
 }

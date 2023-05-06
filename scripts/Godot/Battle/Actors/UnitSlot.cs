@@ -35,6 +35,12 @@ namespace TurnBattle.Godot.Battle.Actors
 
         public override void PerformAction(BattleAction action)
         {
+            int cost = action.Skill.Cost;
+            if(action.Owner.Battler.Mp < cost)
+            {
+                return;
+            }
+            
             ActionEnabled = false;
             IsActing = true;
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
@@ -42,6 +48,8 @@ namespace TurnBattle.Godot.Battle.Actors
             {
                 action.TargetGroup = new SingleTargetGroup(_targetSelector.GetSelected());
             }
+            action.Owner.Battler.Mp -= cost;
+            action.Owner.Battler.Update?.Invoke(nameof(action.Owner.Battler.Mp));
             foreach (var target in action.TargetGroup.GetTargets())
             {
                 var targetSlot = target as BaseSlot;

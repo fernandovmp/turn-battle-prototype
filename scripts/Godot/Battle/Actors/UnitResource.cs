@@ -10,6 +10,8 @@ namespace TurnBattle.Godot.Battle.Actors
         [Export]
         public int MaxHp { get; set; }
         [Export]
+        public int MaxMp { get; set; }
+        [Export]
         public int Attack { get; set; }
         [Export]
         public SpriteFrames AnimationFrames { get; set; }

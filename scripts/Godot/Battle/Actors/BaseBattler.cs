@@ -10,6 +10,7 @@ namespace TurnBattle.Godot.Battle.Actors
     {
         public string Name { get; set; }
         public RangeStat Hp { get; set; }
+        public RangeStat Mp { get; set; }
         public int Attack { get; set; }
         public SpriteFrames AnimationFrames { get; set; }
         public Skill AttackSkill { get; set; }

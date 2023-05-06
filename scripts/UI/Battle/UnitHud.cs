@@ -6,15 +6,20 @@ namespace TurnBattle.UI.Battle
     public class UnitHud : Node
     {
         private Label _nameLabel;
-        private TextureProgress _hpBar;
+        private ProgressBar _hpBar;
+        private ProgressBar _mpBar;
         private IBattlerSlot _unit;
+        [Export]
+        public bool ShowMpBar { get; set; }
 
         private const int BAR_MAGNITUDE = 100;
 
         public void Initialize()
         {
             _nameLabel = GetNode<Label>("NameLabel");
-            _hpBar = GetNode<TextureProgress>("HpBar");
+            _hpBar = GetNode<ProgressBar>("HpBar");
+            _mpBar = GetNode<ProgressBar>("MpBar");
+            _mpBar.Visible = ShowMpBar;
         }
 
         public void SetUnit(IBattlerSlot unit)
@@ -42,6 +47,9 @@ namespace TurnBattle.UI.Battle
             {
                 case nameof(battler.Hp):
                     _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
+                    break;
+                case nameof(battler.Mp):
+                    _mpBar.Value = _unit.Battler.Mp.Ratio() * BAR_MAGNITUDE;
                     break;
                 default:
                     break;

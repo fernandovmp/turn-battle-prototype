@@ -7,11 +7,11 @@ namespace TurnBattle.Battle.Actors
     {
         string Name { get; }
         RangeStat Hp { get; set; }
+        RangeStat Mp { get; set; }
         int Attack { get; }
         Action<string> Update { get; set; }
         Action<BattlerDamageRecivedArgs> DamageRecived { get; set; }
         Action Died { get; set; }
-
 
         void DealDamage(int damage);
     }

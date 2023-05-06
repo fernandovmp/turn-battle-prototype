@@ -12,6 +12,7 @@ namespace TurnBattle.Godot.Battle.Actors
         {
             Name = unit.Name;
             Hp = new RangeStat(unit.MaxHp);
+            Mp = new RangeStat(unit.MaxMp);
             Attack = unit.Attack;
             AnimationFrames = unit.AnimationFrames;
             AttackSkill = unit.AttackSkill.AsSkill();

@@ -53,8 +53,8 @@ namespace TurnBattle.UI.Battle
             int i = 0;
             foreach (var unit in units)
             {
-                var hudNode = _unitHudModel.Instance();
-                var hud = hudNode as UnitHud;
+                var hud = _unitHudModel.Instance<UnitHud>();
+                hud.ShowMpBar = true;
                 hud.Initialize();
                 hud.SetUnit(unit);
                 hudRoot.AddChild(hud);
@@ -116,8 +116,8 @@ namespace TurnBattle.UI.Battle
             var hud = _targetHudRoot.GetNodeOrNull<UnitHud>("TargetHud");
             if (hud == null)
             {
-                var hudNode = _unitHudModel.Instance();
-                hud = hudNode as UnitHud;
+                hud = _unitHudModel.Instance<UnitHud>();
+                hud.ShowMpBar = false;
                 hud.Initialize();
                 hud.Name = "TargetHud";
                 _targetHudRoot.AddChild(hud);

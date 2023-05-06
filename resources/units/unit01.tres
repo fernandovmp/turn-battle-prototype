@@ -59,6 +59,7 @@ animations = [ {
 script = ExtResource( 2 )
 Name = "Ametista"
 MaxHp = 100
+MaxMp = 10
 Attack = 10
 AnimationFrames = SubResource( 8 )
 AttackSkill = ExtResource( 3 )

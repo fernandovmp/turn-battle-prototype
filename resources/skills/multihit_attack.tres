@@ -11,3 +11,4 @@ IdleAnimation = "idle"
 ActionAnimation = "attack"
 TargetType = 1
 Animation = ExtResource( 2 )
+Cost = 0
