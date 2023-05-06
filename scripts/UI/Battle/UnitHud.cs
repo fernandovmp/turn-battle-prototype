@@ -9,6 +9,8 @@ namespace TurnBattle.UI.Battle
         private TextureProgress _hpBar;
         private IBattlerSlot _unit;
 
+        private const int BAR_MAGNITUDE = 100;
+
         public void Initialize()
         {
             _nameLabel = GetNode<Label>("NameLabel");
@@ -22,26 +24,34 @@ namespace TurnBattle.UI.Battle
                 RemoveUnit();
             }
             _unit = unit;
-            _unit.Died += Update;
-            _unit.DamageRecived += DamageRecived;
-            Update();
-        }
-
-        private void DamageRecived(SlotDamageRecivedArgs obj)
-        {
-            Update();
+            _unit.Died += FullUpdate;
+            _unit.Battler.Update += UpdateHud;
+            FullUpdate();
         }
 
         private void RemoveUnit()
         {
-            _unit.Died -= Update;
-            _unit.DamageRecived -= DamageRecived;
+            _unit.Died -= FullUpdate;
+            _unit.Battler.Update -= UpdateHud;
         }
 
-        public void Update()
+        private void UpdateHud(string property)
+        {
+            var battler = _unit.Battler;
+            switch(property)
+            {
+                case nameof(battler.Hp):
+                    _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void FullUpdate()
         {
             _nameLabel.Text = _unit.Battler.Name;
-            _hpBar.Value = _unit.Battler.Hp / (double)_unit.Battler.MaxHp * 100;
+            _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
         }
     }
 }

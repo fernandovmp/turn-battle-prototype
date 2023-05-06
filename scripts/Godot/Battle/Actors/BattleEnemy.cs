@@ -1,3 +1,5 @@
+using TurnBattle.Battle.Stats;
+
 namespace TurnBattle.Godot.Battle.Actors
 {
     public class BattleEnemy : BaseBattler
@@ -5,8 +7,7 @@ namespace TurnBattle.Godot.Battle.Actors
         public BattleEnemy(EnemyResource unit)
         {
             Name = unit.Name;
-            MaxHp = unit.MaxHp;
-            Hp = unit.MaxHp;
+            Hp = new RangeStat(unit.MaxHp);
             Attack = unit.Attack;
             AnimationFrames = unit.AnimationFrames;
             AttackSkill = unit.AttackSkill.AsSkill();
