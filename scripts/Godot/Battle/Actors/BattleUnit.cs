@@ -16,7 +16,9 @@ namespace TurnBattle.Godot.Battle.Actors
             Attack = unit.Attack;
             AnimationFrames = unit.AnimationFrames;
             AttackSkill = unit.AttackSkill.AsSkill();
+            AttackSkill.Cost = 0;
             _skills = unit.Skills?.Select(x => x.AsSkill()).ToList() ?? new List<TurnBattle.Skills.Skill>();
+            _skills.Insert(0, AttackSkill);
         }
 
         public IReadOnlyCollection<TurnBattle.Skills.Skill> Skills => _skills;

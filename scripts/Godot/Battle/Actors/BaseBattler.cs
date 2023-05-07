@@ -31,5 +31,11 @@ namespace TurnBattle.Godot.Battle.Actors
                 Damage = damage
             });
         }
+
+        public void UseMp(int amount)
+        {
+            Mp -= amount;
+            Update?.Invoke(nameof(Mp));
+        }
     }
 }

@@ -19,5 +19,26 @@ namespace TurnBattle.Battle.Actions
             ActionChange?.Invoke();
         }
 
+        public bool Execute()
+        {
+            if(CannotExceute())
+            {
+                return false;
+            }
+            Owner.Battler.UseMp(Skill.Cost);
+            foreach (var target in TargetGroup.GetTargets())
+            {
+                target.HandleSkillAsTarget(new CastContext
+                {
+                    Caster = Owner,
+                    Skill = Skill,
+                    Target = target
+                });
+            }
+            return true;
+        }
+
+        public virtual bool CanExecute() => Owner.Battler.Mp >= Skill.Cost;
+        public bool CannotExceute() => !CanExecute();
     }
 }

@@ -35,32 +35,19 @@ namespace TurnBattle.Godot.Battle.Actors
 
         public override void PerformAction(BattleAction action)
         {
-            int cost = action.Skill.Cost;
-            if(action.Owner.Battler.Mp < cost)
-            {
-                return;
-            }
             
-            ActionEnabled = false;
-            IsActing = true;
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
             if (action.TargetGroup is null)
             {
                 action.TargetGroup = new SingleTargetGroup(_targetSelector.GetSelected());
             }
-            action.Owner.Battler.Mp -= cost;
-            action.Owner.Battler.Update?.Invoke(nameof(action.Owner.Battler.Mp));
-            foreach (var target in action.TargetGroup.GetTargets())
+            if(action.CannotExceute())
             {
-                var targetSlot = target as BaseSlot;
-                var skillCaster = new SkillCaster(new CastContext
-                {
-                    Caster = action.Owner,
-                    Skill = action.Skill,
-                    Target = target
-                });
-                targetSlot.AddSkillAnimation(action.Skill.Animation, skillCaster);
+                return;
             }
+            ActionEnabled = false;
+            IsActing = true;
+            action.Execute();
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
             _animatedSprite.Play(action.Skill.ActionAnimation);
             ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);

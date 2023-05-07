@@ -14,5 +14,6 @@ namespace TurnBattle.Battle.Actors
         Action Died { get; set; }
 
         void DealDamage(int damage);
+        void UseMp(int amount);
     }
 }

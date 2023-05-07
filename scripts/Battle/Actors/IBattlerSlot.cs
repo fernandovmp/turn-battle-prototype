@@ -1,5 +1,6 @@
 using System;
 using TurnBattle.Battle.Actions;
+using TurnBattle.Skills;
 
 namespace TurnBattle.Battle.Actors
 {
@@ -14,5 +15,6 @@ namespace TurnBattle.Battle.Actors
         bool IsDead { get; set; }
         void PerformAction(BattleAction action);
         void DealDamage(int damage);
+        void HandleSkillAsTarget(CastContext castContext);
     }
 }
