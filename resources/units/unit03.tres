@@ -55,6 +55,7 @@ animations = [ {
 script = ExtResource( 2 )
 Name = "Coralina"
 MaxHp = 90
+MaxMp = 0
 Attack = 12
 AnimationFrames = SubResource( 8 )
 AttackSkill = ExtResource( 1 )

@@ -66,6 +66,7 @@ namespace TurnBattle.UI.Battle
 				var button = new SkillItem(skill);
 				button.RectSize = new Vector2(100, 30);
 				button.OnPressed += SelectSkill;
+				button.Disabled = unit.Mp < skill.Cost;
 				return button;
 			}));
 			_skillList.FocusFirst();

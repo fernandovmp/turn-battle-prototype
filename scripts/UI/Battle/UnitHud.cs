@@ -47,9 +47,11 @@ namespace TurnBattle.UI.Battle
             {
                 case nameof(battler.Hp):
                     _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
+                    _hpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Hp.Current}/{_unit.Battler.Hp.Max}";
                     break;
                 case nameof(battler.Mp):
                     _mpBar.Value = _unit.Battler.Mp.Ratio() * BAR_MAGNITUDE;
+                    _mpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Mp.Current}/{_unit.Battler.Mp.Max}";
                     break;
                 default:
                     break;
@@ -60,6 +62,9 @@ namespace TurnBattle.UI.Battle
         {
             _nameLabel.Text = _unit.Battler.Name;
             _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
+            _hpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Hp.Current}/{_unit.Battler.Hp.Max}";
+            _mpBar.Value = _unit.Battler.Mp.Ratio() * BAR_MAGNITUDE;
+            _mpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Mp.Current}/{_unit.Battler.Mp.Max}";
         }
     }
 }

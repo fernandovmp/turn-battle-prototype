@@ -15,7 +15,7 @@ namespace TurnBattle.UI.Controls
 
         public override void _Ready()
         {
-            Text = Skill.Name;
+            Text = $"{Skill.Name} | MP: {Skill.Cost}";
         }
 
         public override void _Pressed()

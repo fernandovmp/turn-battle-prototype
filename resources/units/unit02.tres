@@ -67,6 +67,7 @@ animations = [ {
 script = ExtResource( 3 )
 Name = "Berilo"
 MaxHp = 98
+MaxMp = 0
 Attack = 12
 AnimationFrames = SubResource( 11 )
 AttackSkill = ExtResource( 1 )
