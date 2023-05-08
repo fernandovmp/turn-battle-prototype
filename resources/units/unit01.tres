@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=13 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://sprites/unit01.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitResource.cs" type="Script" id=2]
 [ext_resource path="res://resources/skills/attack.tres" type="Resource" id=3]
+[ext_resource path="res://resources/skills/triple_slash.tres" type="Resource" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -58,6 +59,8 @@ animations = [ {
 script = ExtResource( 2 )
 Name = "Ametista"
 MaxHp = 100
+MaxMp = 10
 Attack = 10
 AnimationFrames = SubResource( 8 )
 AttackSkill = ExtResource( 3 )
+Skills = [ ExtResource( 4 ) ]

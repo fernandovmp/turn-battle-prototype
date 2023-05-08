@@ -11,6 +11,7 @@ namespace TurnBattle.Skills
         public string ActionAnimation { get; set; }
         public TargetTypeEnum TargetType { get; set; }
         public SkillAnimation Animation { get; set; }
+        public int Cost { get; set; }
 
         public void Cast(CastContext context)
         {

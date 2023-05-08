@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Godot/Resources/KeyboardMapResource.cs" type="Script" id=1]
 [ext_resource path="res://sprites/gamepad/keyboard/S-Key.png" type="Texture" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://sprites/gamepad/keyboard/D-Key.png" type="Texture" id=4]
 [ext_resource path="res://sprites/gamepad/keyboard/A-Key.png" type="Texture" id=5]
 [ext_resource path="res://sprites/gamepad/keyboard/W-Key.png" type="Texture" id=6]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Left.png" type="Texture" id=7]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Right.png" type="Texture" id=8]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Down.png" type="Texture" id=9]
+[ext_resource path="res://sprites/gamepad/ps/Button - PS Directional Arrow Up.png" type="Texture" id=10]
+[ext_resource path="res://sprites/gamepad/keyboard/R-Key.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -14,4 +19,9 @@ A = ExtResource( 5 )
 W = ExtResource( 6 )
 S = ExtResource( 2 )
 D = ExtResource( 4 )
+R = ExtResource( 11 )
 Space = ExtResource( 3 )
+Left = ExtResource( 7 )
+Up = ExtResource( 10 )
+Right = ExtResource( 8 )
+Down = ExtResource( 9 )

@@ -1,10 +1,15 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Godot/Resources/GamepadMapResource.cs" type="Script" id=1]
 [ext_resource path="res://sprites/gamepad/xbox/button_xbox_digital_a_11.png" type="Texture" id=2]
 [ext_resource path="res://sprites/gamepad/xbox/button_xbox_digital_x_11.png" type="Texture" id=3]
 [ext_resource path="res://sprites/gamepad/xbox/button_xbox_digital_y_11.png" type="Texture" id=4]
 [ext_resource path="res://sprites/gamepad/xbox/button_xbox_digital_b_11.png" type="Texture" id=5]
+[ext_resource path="res://sprites/gamepad/xbox/button_xboxone_dpad_dark_4.png" type="Texture" id=6]
+[ext_resource path="res://sprites/gamepad/xbox/button_xboxone_dpad_dark_2.png" type="Texture" id=7]
+[ext_resource path="res://sprites/gamepad/xbox/button_xboxone_dpad_dark_3.png" type="Texture" id=8]
+[ext_resource path="res://sprites/gamepad/xbox/button_xbox_digital_view_2.png" type="Texture" id=9]
+[ext_resource path="res://sprites/gamepad/xbox/button_xboxone_dpad_dark_1.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
@@ -13,3 +18,8 @@ BottomDigitalButton = ExtResource( 2 )
 LeftDigitalButton = ExtResource( 3 )
 TopDigitalButton = ExtResource( 4 )
 RightDigitalButton = ExtResource( 5 )
+LeftArrow = ExtResource( 6 )
+UpArrow = ExtResource( 10 )
+RightArrow = ExtResource( 7 )
+DownArrow = ExtResource( 8 )
+Start = ExtResource( 9 )

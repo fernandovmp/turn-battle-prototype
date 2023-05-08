@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://sprites/unit04.png" type="Texture" id=1]
 [ext_resource path="res://resources/skills/double_arrow.tres" type="Resource" id=2]
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitResource.cs" type="Script" id=3]
+[ext_resource path="res://resources/skills/multihit_attack.tres" type="Resource" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -86,6 +87,8 @@ animations = [ {
 script = ExtResource( 3 )
 Name = "Diamanto"
 MaxHp = 80
+MaxMp = 8
 Attack = 9
 AnimationFrames = SubResource( 16 )
 AttackSkill = ExtResource( 2 )
+Skills = [ ExtResource( 4 ) ]

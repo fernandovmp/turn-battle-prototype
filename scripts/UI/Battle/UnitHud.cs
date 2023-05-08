@@ -6,13 +6,20 @@ namespace TurnBattle.UI.Battle
     public class UnitHud : Node
     {
         private Label _nameLabel;
-        private TextureProgress _hpBar;
+        private ProgressBar _hpBar;
+        private ProgressBar _mpBar;
         private IBattlerSlot _unit;
+        [Export]
+        public bool ShowMpBar { get; set; }
+
+        private const int BAR_MAGNITUDE = 100;
 
         public void Initialize()
         {
             _nameLabel = GetNode<Label>("NameLabel");
-            _hpBar = GetNode<TextureProgress>("HpBar");
+            _hpBar = GetNode<ProgressBar>("HpBar");
+            _mpBar = GetNode<ProgressBar>("MpBar");
+            _mpBar.Visible = ShowMpBar;
         }
 
         public void SetUnit(IBattlerSlot unit)
@@ -22,26 +29,42 @@ namespace TurnBattle.UI.Battle
                 RemoveUnit();
             }
             _unit = unit;
-            _unit.Died += Update;
-            _unit.DamageRecived += DamageRecived;
-            Update();
-        }
-
-        private void DamageRecived(SlotDamageRecivedArgs obj)
-        {
-            Update();
+            _unit.Died += FullUpdate;
+            _unit.Battler.Update += UpdateHud;
+            FullUpdate();
         }
 
         private void RemoveUnit()
         {
-            _unit.Died -= Update;
-            _unit.DamageRecived -= DamageRecived;
+            _unit.Died -= FullUpdate;
+            _unit.Battler.Update -= UpdateHud;
         }
 
-        public void Update()
+        private void UpdateHud(string property)
+        {
+            var battler = _unit.Battler;
+            switch(property)
+            {
+                case nameof(battler.Hp):
+                    _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
+                    _hpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Hp.Current}/{_unit.Battler.Hp.Max}";
+                    break;
+                case nameof(battler.Mp):
+                    _mpBar.Value = _unit.Battler.Mp.Ratio() * BAR_MAGNITUDE;
+                    _mpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Mp.Current}/{_unit.Battler.Mp.Max}";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void FullUpdate()
         {
             _nameLabel.Text = _unit.Battler.Name;
-            _hpBar.Value = _unit.Battler.Hp / (double)_unit.Battler.MaxHp * 100;
+            _hpBar.Value = _unit.Battler.Hp.Ratio() * BAR_MAGNITUDE;
+            _hpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Hp.Current}/{_unit.Battler.Hp.Max}";
+            _mpBar.Value = _unit.Battler.Mp.Ratio() * BAR_MAGNITUDE;
+            _mpBar.GetNode<Label>("Label").Text = $"{_unit.Battler.Mp.Current}/{_unit.Battler.Mp.Max}";
         }
     }
 }

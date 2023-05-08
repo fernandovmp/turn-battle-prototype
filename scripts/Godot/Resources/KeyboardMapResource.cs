@@ -16,7 +16,17 @@ namespace TurnBattle.Godot.Resources
         [Export]
         public Texture D { get; set; }
         [Export]
+        public Texture R { get; set; }
+        [Export]
         public Texture Space { get; set; }
+        [Export]
+        public Texture Left { get; set; }
+        [Export]
+        public Texture Up { get; set; }
+        [Export]
+        public Texture Right { get; set; }
+        [Export]
+        public Texture Down { get; set; }
 
         public Texture GetTextureForEvent(object @event)
         {
@@ -39,8 +49,18 @@ namespace TurnBattle.Godot.Resources
                     return S;
                 case KeyList.D:
                     return D;
+                case KeyList.R:
+                    return R;
                 case KeyList.Space:
                     return Space;
+                case KeyList.Left:
+                    return Left;
+                case KeyList.Up:
+                    return Up;
+                case KeyList.Right:
+                    return Right;
+                case KeyList.Down:
+                    return Down;
                 default:
                     return null;
             }

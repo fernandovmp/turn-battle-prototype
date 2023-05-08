@@ -5,6 +5,7 @@ using TurnBattle.Battle.Actors;
 using TurnBattle.Godot.Skills;
 using System;
 using System.Threading.Tasks;
+using TurnBattle.Skills;
 
 namespace TurnBattle.Godot.Battle.Actors
 {
@@ -55,6 +56,8 @@ namespace TurnBattle.Godot.Battle.Actors
             float hitModifier = 1 + 0.08f * (hits - 1);
             Battler.DealDamage((int)Math.Ceiling(damage * hitModifier));
         }
+
+        public void HandleSkillAsTarget(CastContext castContext) => AddSkillAnimation(castContext.Skill.Animation, new SkillCaster(castContext));
 
         public void AddSkillAnimation(SkillAnimation animation, SkillCaster skillCaster)
         {

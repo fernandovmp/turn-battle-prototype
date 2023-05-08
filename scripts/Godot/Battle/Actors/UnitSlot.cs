@@ -18,7 +18,7 @@ namespace TurnBattle.Godot.Battle.Actors
         private SkillCaster _skillCaster;
         public BattleAction SelectedAction => _selectedAction;
         public string ActionMap => _actionMap;
-    
+
         public override void _Ready()
         {
             base._Ready();
@@ -35,20 +35,19 @@ namespace TurnBattle.Godot.Battle.Actors
 
         public override void PerformAction(BattleAction action)
         {
-            ActionEnabled = false;
-            IsActing = true;
+            
             _actionTaskCompletionSource = new TaskCompletionSource<BattleAction>();
             if (action.TargetGroup is null)
             {
-                var targetSlot = _targetSelector.GetSelected() as BaseSlot;
-                _skillCaster = new SkillCaster(new CastContext
-                {
-                    Caster = this,
-                    Skill = action.Skill,
-                    Target = targetSlot
-                });
-                targetSlot.AddSkillAnimation(action.Skill.Animation, _skillCaster);
+                action.TargetGroup = new SingleTargetGroup(_targetSelector.GetSelected());
             }
+            if(action.CannotExceute())
+            {
+                return;
+            }
+            ActionEnabled = false;
+            IsActing = true;
+            action.Execute();
             _animatedSprite.Connect(Constants.AnimationFinishedSignal, this, nameof(ResetAnimation));
             _animatedSprite.Play(action.Skill.ActionAnimation);
             ActionDispatcher.Dispatch(_actionTaskCompletionSource.Task);

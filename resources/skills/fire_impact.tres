@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Godot/Skills/SkillResource.cs" type="Script" id=1]
+[ext_resource path="res://resources/skills/animations/fire_impact.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+Name = "Fire Impact"
+Multiplier = 2.0
+IdleAnimation = "idle"
+ActionAnimation = "attack"
+TargetType = 0
+Animation = ExtResource( 2 )
+Cost = 4

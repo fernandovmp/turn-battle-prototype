@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/Godot/Battle/Actors/UnitSlot.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://scripts/UI/Battle/ActionHudGroup.cs" type="Script" id=13]
 [ext_resource path="res://scenes/battle/ActionHud.tscn" type="PackedScene" id=14]
 [ext_resource path="res://audio/bgm/BGM07battle3.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/battle/ActionSelectionUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://styles/ui_default_theme.tres" type="Theme" id=17]
 
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
@@ -55,9 +57,6 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.705882 )
 
 [sub_resource type="DynamicFont" id=23]
 size = 32
@@ -154,9 +153,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -475.0
-margin_top = -75.0
+margin_top = -85.0
 margin_right = 475.0
-margin_bottom = -10.0
+margin_bottom = -20.0
 
 [node name="DamageTextContainer" type="Control" parent="CanvasLayer/BattleUI"]
 margin_right = 40.0
@@ -182,7 +181,7 @@ margin_left = -359.0
 margin_top = -66.5
 margin_right = 359.0
 margin_bottom = 66.5
-custom_styles/panel = SubResource( 22 )
+theme = ExtResource( 17 )
 script = ExtResource( 3 )
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/ResultUI"]
@@ -206,6 +205,9 @@ custom_fonts/normal_font = SubResource( 24 )
 bbcode_enabled = true
 bbcode_text = "[center]press [button] to continue"
 text = "press [button] to continue"
+
+[node name="ActionSelectionUI" parent="CanvasLayer" instance=ExtResource( 16 )]
+visible = false
 
 [node name="BattleSystem" type="Node" parent="."]
 script = ExtResource( 4 )

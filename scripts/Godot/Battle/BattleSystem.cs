@@ -188,5 +188,28 @@ namespace TurnBattle.Godot.Battle
             yield return _leftUnit;
             yield return _bottomUnit;
         }
+
+        public override void _Input(InputEvent inputEvent)
+        {
+            var units = EnumerateUnits().Where(unit => unit.CanAct);
+            if (inputEvent.IsActionPressed("battle_open_skill_ui") && Phase == BattlePhaseEnum.PartyTurn && units.Any())
+            {
+                var actionSelectionUI = GetNode<UI.Battle.ActionSelectionUI>("/root/Root/CanvasLayer/ActionSelectionUI");
+                if(!actionSelectionUI.Visible)
+                {
+                    SetInput(false);
+                    actionSelectionUI.Show(units, this);
+                }
+            }
+        }
+
+        internal void SetInput(bool enabled)
+        {
+            _targetSelector.Enabled = enabled;
+            foreach(var x in EnumerateUnits())
+            {
+                x.SetProcessInput(enabled);
+            }
+        }
     }
 }
